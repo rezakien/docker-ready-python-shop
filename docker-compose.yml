@@ -4,13 +4,13 @@ services:
   db-telegram-bot:
     image: postgres
     environment:
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
     ports:
-      - "5431:5432"
+      - "${PG_HOST_PORT}:${PG_CONTAINER_PORT}"
   adminer:
     image: adminer
     ports:
-      - "89:8080"
+      - "${ADMINER_HOST_PORT}:${ADMINER_CONTAINER_PORT}"
 networks:
     default:
         external:
