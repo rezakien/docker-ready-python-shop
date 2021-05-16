@@ -6,5 +6,8 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 ADMIN_ID = os.getenv("MY_ID")
 ID_E = os.getenv("ID_E")
 HOST = os.getenv("HOST")
+
+PG_HOST = os.getenv("PG_HOST")
 PG_USER = os.getenv("PG_USER")
 PG_PASSWORD = os.getenv("PG_PASSWORD")
+PG_PORT = os.getenv("PG_HOST_PORT")

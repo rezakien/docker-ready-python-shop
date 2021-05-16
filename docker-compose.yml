@@ -1,16 +1,27 @@
 version: '3'
 
 services:
-  db-telegram-bot:
+  db:
+    container_name: tg-db
     image: postgres
     environment:
       POSTGRES_PASSWORD: ${PG_PASSWORD}
     ports:
       - "${PG_HOST_PORT}:${PG_CONTAINER_PORT}"
   adminer:
+    container_name: tg-adminer
     image: adminer
     ports:
       - "${ADMINER_HOST_PORT}:${ADMINER_CONTAINER_PORT}"
+    depends_on:
+      - db
+  bot:
+    container_name: tg-bot
+    build:
+      context: .
+    command: python app.py
+    depends_on:
+      - db
 networks:
     default:
         external:

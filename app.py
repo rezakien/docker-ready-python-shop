@@ -1,8 +1,11 @@
+import asyncio
+
 from aiogram import executor
-from handlers import dp
+
 
 from loader import bot
 from config import ADMIN_ID
+from sql import create_db
 
 
 async def on_shutdown(dp):
@@ -10,8 +13,11 @@ async def on_shutdown(dp):
 
 
 async def on_startup(dp):
-    await bot.send_message(ADMIN_ID, "bot-is-started")
+    await asyncio.sleep(10)
+    await create_db()
+    await bot.send_message(ADMIN_ID, "Я запущен")
 
 
 if __name__ == '__main__':
+    from handlers import dp
     executor.start_polling(dp, on_shutdown=on_shutdown, on_startup=on_startup)

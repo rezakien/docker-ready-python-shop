@@ -14,7 +14,7 @@ logging.basicConfig(format=u'%(filename)s [LINE:%(lineno)d] #%(levelname)-8s [%(
 loop = asyncio.get_event_loop()
 
 storage = MemoryStorage()
+
 bot = Bot(token=config.BOT_TOKEN, parse_mode=ParseMode.HTML)
 dp = Dispatcher(bot, storage=storage)
-
 db = loop.run_until_complete(create_pool())

@@ -1,4 +1,4 @@
-create table users
+create table IF NOT EXISTS users
 (
     chat_id bigint not null constraint users_pk primary key,
     username  text,
@@ -10,4 +10,4 @@ create table users
 
 alter table users owner to postgres;
 
-create unique index users_id_uindex on users (id);
+create unique index IF NOT EXISTS users_id_uindex on users (id);
