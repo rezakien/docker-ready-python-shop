@@ -5,7 +5,7 @@ from aiogram import executor
 
 from loader import bot
 from config import ADMIN_ID
-from sql import create_db
+from utils.db_api.database import create_db
 
 
 async def on_shutdown(dp):
