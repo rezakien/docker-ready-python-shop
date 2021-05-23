@@ -101,7 +101,6 @@ class DBCommands:
 
     async def show_items(self):
         items = await Item.query.gino.all()
-
         return items
 
 

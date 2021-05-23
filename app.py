@@ -13,9 +13,9 @@ async def on_shutdown(dp):
 
 
 async def on_startup(dp):
-    await asyncio.sleep(10)
+    # await asyncio.sleep(10)
     await create_db()
-    await bot.send_message(ADMIN_ID, "Я запущен")
+    await bot.send_message(ADMIN_ID, "Я запущен /start")
 
 
 if __name__ == '__main__':

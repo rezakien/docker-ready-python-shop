@@ -6,3 +6,11 @@
 3. docker-compose up
 4. docker-compose exec db psql -U postgres -c "CREATE DATABASE gino;"
 5. docker-compose stop && docker-compose up --build
+
+# Инструкция с языками
+  
+Название - testbot, можете сменить на любое другое
+
+Запускаем первый раз
+1. sh language-init.sh
+2. sh language-compile.sh
