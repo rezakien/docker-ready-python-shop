@@ -1,5 +1,6 @@
 import logging
 import asyncio
+from typing import List
 
 from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
@@ -23,5 +24,5 @@ i18n = setup_middleware(dp)
 _ = i18n.gettext
 
 
-def get_all_language_variants(i18n_word):
+def get_all_language_variants(i18n_word) -> List:
     return [_(i18n_word, locale=locale) for locale in ['uz', 'ru']]

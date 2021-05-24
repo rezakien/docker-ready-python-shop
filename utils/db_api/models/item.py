@@ -10,10 +10,10 @@ from utils.db_api.database import db
 
 
 class Item(db.Model):
-    __tablename__ = 'items'
+    __tablename__ = 'item'
     query: sql.Select
 
-    id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+    id = Column(Integer, Sequence('item_id_seq'), primary_key=True)
     name = Column(String(50))
     price = Column(Integer)
     category_id = Column(Integer, ForeignKey('category.id'))

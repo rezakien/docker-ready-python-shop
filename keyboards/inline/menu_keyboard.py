@@ -1,6 +1,7 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from keyboards.inline.callbacks import make_callback_data, item_callback
+from loader import _
 from utils.db_api import Category
 
 
@@ -42,56 +43,44 @@ async def get_subcategories_keyboard(category_id):
                 callback_data=make_callback_data(category=category_id, show_items=True)
             )
         )
-    markup.row(
-        InlineKeyboardButton(
-            text="Назад",
-            callback_data=make_callback_data(category=category_id)
-        )
-    )
     return markup
 
 
-async def get_items_keyboard(category):
+async def get_items_keyboard(category_id):
     markup = InlineKeyboardMarkup(resize_keyboard=True, row_width=1)
-    items = await Category.all_items_of_category(category)
+    items = await Category.all_items_of_category(category_id)
     if len(items) > 0:
-
         for item in items:
-            callback_data = make_callback_data(category=category,
+            callback_data = make_callback_data(category=category_id,
                                                item_id=item.id)
             button_text = f"{item.name} - {item.price} сум."
             markup.insert(
                 InlineKeyboardButton(text=button_text, callback_data=callback_data)
             )
-    markup.row(
-        InlineKeyboardButton(
-            text="Назад",
-            callback_data=make_callback_data(category=category)
-        )
-    )
     return markup
 
 
-def item_keyboard(category, item_id):
+def get_back_button(category_id):
+    return InlineKeyboardButton(
+        text=_("Назад"),
+        callback_data=make_callback_data(category=category_id)
+    )
+
+
+def item_keyboard(item_id):
     inline_keyboard = [InlineKeyboardButton(
-        text="+25",
-        callback_data=item_callback.new(item_id=item_id)
+        text="+25 кг",
+        callback_data=item_callback.new(item_id=item_id, quantity=25)
     ), InlineKeyboardButton(
-        text="+100",
-        callback_data=item_callback.new(item_id=item_id)
+        text="+100 кг",
+        callback_data=item_callback.new(item_id=item_id, quantity=100)
     ), InlineKeyboardButton(
-        text="+500",
-        callback_data=item_callback.new(item_id=item_id)
+        text="+500 кг",
+        callback_data=item_callback.new(item_id=item_id, quantity=500)
     ), InlineKeyboardButton(
         text="🗑",
-        callback_data=item_callback.new(item_id=item_id)
+        callback_data=item_callback.new(item_id=item_id, quantity=0)
     )]
     markup = InlineKeyboardMarkup(resize_keyboard=True)
     markup.row(*inline_keyboard)
-    markup.row(
-        InlineKeyboardButton(
-            text="Назад",
-            callback_data=make_callback_data(category=category)
-        ),
-    )
     return markup

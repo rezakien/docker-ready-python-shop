@@ -8,7 +8,7 @@ from loader import Bot
 
 
 class User(db.Model):
-    __tablename__ = 'users'
+    __tablename__ = 'user'
 
     id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
     user_id = Column(BigInteger)

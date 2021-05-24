@@ -1,13 +1,10 @@
-import asyncio
-from typing import Union
-
-from aiogram.types import Message, ReplyKeyboardRemove, User
+from aiogram.types import Message, User
 from aiogram.dispatcher.filters import Text
 from aiogram.types import CallbackQuery
 
 from keyboards.default import get_menu_keyboard
 
-from keyboards.inline.callbacks import lang_callback
+from keyboards.inline.callbacks import language_callback
 from keyboards.inline.callbacks import category_callback
 
 from keyboards.inline.lang_keyboard import get_lang_keyboard
@@ -26,20 +23,6 @@ async def menu_category_handler(message: Message):
     await message.answer(f"{text}", reply_markup=reply_markup)
 
 
-@dp.message_handler(Text(equals=get_all_language_variants("Корзина 🛒")))
-async def menu_cart_handler(message: Message):
-    text = _("У вас пока нет товаров в корзине. ")
-    reply_markup = None
-    await message.answer(f"{text}", reply_markup=reply_markup)
-
-
-@dp.message_handler(Text(equals=get_all_language_variants("Заказы 📦")))
-async def menu_orders_handler(message: Message):
-    text = _("У вас пока нет заказов.")
-    reply_markup = None
-    await message.answer(f"{text}", reply_markup=reply_markup)
-
-
 @dp.message_handler(Text(equals=get_all_language_variants("Помощь ❓")))
 async def menu_help_handler(message: Message):
     text = _("Здесь вы можете получить информацию о боте.")
@@ -54,7 +37,7 @@ async def menu_language_handler(message: Message):
     await message.answer(f"{text}", reply_markup=reply_markup)
 
 
-@dp.callback_query_handler(lang_callback.filter())
+@dp.callback_query_handler(language_callback.filter())
 async def lang_handler(call: CallbackQuery, callback_data: dict):
     await call.answer(cache_time=1)
     lang = callback_data.get("lang")
@@ -71,7 +54,7 @@ async def categories_handler(call: CallbackQuery, callback_data: dict):
     category = int(callback_data.get("category"))
     item_id = int(callback_data.get("item_id"))
     show_items = callback_data.get("show_items")
-    
+
     levels = {
         "0": list_categories,
         "1": list_subcategories,
@@ -91,13 +74,9 @@ async def categories_handler(call: CallbackQuery, callback_data: dict):
     await current_level_function(call, category=category, item_id=item_id)
 
 
-async def list_categories(message: Union[Message, CallbackQuery], **kwargs):
+async def list_categories(callback: CallbackQuery, **kwargs):
     markup = await get_categories_keyboard()
-
-    if isinstance(message, Message):
-        await message.answer("Смотри, что у нас есть", reply_markup=markup)
-    elif isinstance(message, CallbackQuery):
-        await message.message.edit_reply_markup(markup)
+    await callback.message.edit_reply_markup(markup)
 
 
 async def list_subcategories(callback: CallbackQuery, category, **kwargs):
@@ -107,11 +86,11 @@ async def list_subcategories(callback: CallbackQuery, category, **kwargs):
 
 async def list_items(callback: CallbackQuery, category, **kwargs):
     markup = await get_items_keyboard(category)
-    await callback.message.edit_text(text="Смотри, что у нас есть", reply_markup=markup)
+    await callback.message.edit_reply_markup(reply_markup=markup)
 
 
 async def show_item(callback: CallbackQuery, category, item_id, **kwargs):
-    markup = item_keyboard(category, item_id)
+    markup = item_keyboard(item_id)
     item = await Item.get_item(item_id)
     text = f"{item}"
     await callback.message.edit_text(text=text, reply_markup=markup)

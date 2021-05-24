@@ -6,10 +6,6 @@ from utils.db_api.database import db
 from utils.db_api.models.item import Item
 
 
-# def default_name_code(context):
-#     return "c_" + '_'.join(context.get_current_parameters()['name'].split())
-
-
 class Category(db.Model):
     __tablename__ = 'category'
     query: sql.Select
@@ -21,8 +17,7 @@ class Category(db.Model):
     active = Column(Boolean, default=True)
 
     def __repr__(self):
-        return "<Category(id='{}', name='{}')>".format(
-            self.id, self.name)
+        return "Категория: <b>{}</b>".format(self.name)
 
     @staticmethod
     async def all_parents():
