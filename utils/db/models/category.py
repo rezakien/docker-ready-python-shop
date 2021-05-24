@@ -2,8 +2,8 @@ from datetime import datetime
 
 from sqlalchemy import (Column, Integer, String, Sequence, ForeignKey, DateTime, Boolean)
 from sqlalchemy import sql
-from utils.db_api.database import db
-from utils.db_api.models.item import Item
+from utils.db.database import db
+from utils.db.models.item import Item
 
 
 class Category(db.Model):

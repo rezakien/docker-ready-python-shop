@@ -4,7 +4,7 @@ from aiogram.dispatcher.filters.builtin import CommandStart
 from keyboards.default.menu_keyboard import get_menu_keyboard
 from keyboards.inline.lang_keyboard import get_lang_keyboard
 from loader import dp, _
-from utils.db_api.models.user import User
+from utils.db.models.user import User
 
 
 @dp.message_handler(CommandStart())

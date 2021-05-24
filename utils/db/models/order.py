@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from sqlalchemy import Column, Integer, String, Sequence, JSON, DateTime, Boolean, sql
-from utils.db_api.database import db
+from utils.db.database import db
 
 
 class Order(db.Model):

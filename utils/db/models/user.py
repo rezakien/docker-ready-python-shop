@@ -2,7 +2,7 @@ from datetime import datetime
 
 from sqlalchemy import (Column, Integer, String, Sequence, BigInteger, DateTime)
 from sqlalchemy import sql
-from utils.db_api.database import db
+from utils.db.database import db
 from aiogram import types
 from loader import Bot
 

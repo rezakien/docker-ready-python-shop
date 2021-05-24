@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from sqlalchemy import Column, Integer, Sequence, ForeignKey, DateTime, sql
-from utils.db_api.database import db
+from utils.db.database import db
 
 
 class OrderItem(db.Model):

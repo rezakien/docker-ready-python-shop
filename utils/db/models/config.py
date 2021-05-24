@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from sqlalchemy import Column, Integer, Sequence, ForeignKey, DateTime, sql, Text, String
-from utils.db_api.database import db
+from utils.db.database import db
 
 
 class Config(db.Model):

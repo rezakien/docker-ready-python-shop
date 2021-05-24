@@ -1,8 +1,8 @@
 import random
 import string
 
-from utils.db_api.models import Item
-from utils.db_api.models import Category
+from utils.db.models import Item
+from utils.db.models import Category
 
 
 def get_random_string(length):
@@ -22,6 +22,6 @@ async def add_items():
         for i in range(50):
             random_name = "Корм " + get_random_string(6)
             random_category_id = categories[random.randint(0, len(categories) - 1)].id
-            random_price = get_integer_price(4)
+            random_price = get_integer_price(3)
             await Item.create_item(name=random_name, price=random_price, category_id=random_category_id)
 

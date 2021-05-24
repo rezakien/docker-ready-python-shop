@@ -14,7 +14,7 @@ async def connect_db():
 
 
 async def create_mocks():
-    from utils.db_api.mocks.add_categories import add_categories
-    from utils.db_api.mocks.add_items import add_items
+    from utils.db.mocks.add_categories import add_categories
+    from utils.db.mocks.add_items import add_items
     await add_categories()
     await add_items()

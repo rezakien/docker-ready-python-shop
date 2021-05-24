@@ -12,8 +12,8 @@ from keyboards.inline.menu_keyboard import get_categories_keyboard, get_subcateg
     item_keyboard
 
 from loader import dp, _, get_all_language_variants
-from utils.db_api import Item
-from utils.db_api.models.user import User
+from utils.db import Item
+from utils.db.models.user import User
 
 
 @dp.message_handler(Text(equals=get_all_language_variants("Категории 🗂")))

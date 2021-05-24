@@ -1,3 +1,3 @@
-from .db_api import mocks
-from .db_api import models
+from .db import mocks
+from .db import models
 

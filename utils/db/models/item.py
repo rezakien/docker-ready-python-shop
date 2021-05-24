@@ -2,7 +2,7 @@ from datetime import datetime
 
 from sqlalchemy import (Column, Integer, String, Sequence, ForeignKey, DateTime, Boolean)
 from sqlalchemy import sql
-from utils.db_api.database import db
+from utils.db.database import db
 
 
 # def default_name_code(context):

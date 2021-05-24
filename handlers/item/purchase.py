@@ -2,7 +2,7 @@ from aiogram.types import CallbackQuery
 
 from keyboards.inline.callbacks import item_callback
 from loader import dp, _
-from utils.db_api import Item, Cart, User
+from utils.db import Item, Cart, User
 
 
 @dp.callback_query_handler(item_callback.filter())
@@ -16,7 +16,7 @@ async def item_cart_resolve(call: CallbackQuery, callback_data: dict):
     text = ""
     await Cart.create_update_item(item_id=item.id, user_id=user.id, quantity=quantity)
     if quantity > 0:
-        text = _("Добавлен товар {}.".format(item.name))
+        text = _("Добавлено {quantity} шт. {item_name}".format(quantity=quantity, item_name=item.name))
     if quantity == 0:
-        text = _("Товар {} удален из корзины.".format(item.name))
+        text = _("Товар удален из корзины".format(item.name))
     await call.answer(text=text, cache_time=1)

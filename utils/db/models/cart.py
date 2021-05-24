@@ -3,8 +3,8 @@ from datetime import datetime
 from aiogram import types
 from sqlalchemy import Column, Integer, Sequence, ForeignKey, DateTime, sql, and_
 
-from utils.db_api import User
-from utils.db_api.database import db
+from utils.db import User, Item
+from utils.db.database import db
 
 
 class Cart(db.Model):
@@ -38,3 +38,17 @@ class Cart(db.Model):
         current = types.User.get_current()
         user = await User.get_user(current.id)
         return await Cart.query.where(Cart.user_id == user.id).order_by(Cart.datetime.desc()).gino.all()
+
+    @staticmethod
+    async def get_cart_sum():
+        current = types.User.get_current()
+        user = await User.get_user(current.id)
+        return await db.select([db.func.sum(Cart.quantity * Item.price)]).select_from(Cart.join(Item)).where(Cart.user_id == user.id).gino.scalar()
+
+    @staticmethod
+    async def clear_cart():
+        current = types.User.get_current()
+        user = await User.get_user(current.id)
+        cart_items =  await Cart.query.where(Cart.user_id == user.id).gino.all()
+        for cart_item in cart_items:
+            await cart_item.delete()
