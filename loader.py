@@ -7,9 +7,9 @@ from aiogram.types import ParseMode
 import config
 from language_middleware import setup_middleware
 
-logging.basicConfig(format=u'%(filename)s [LINE:%(lineno)d] #%(levelname)-8s [%(asctime)s]  %(message)s',
-                    level=logging.INFO,
-                    )
+# logging.basicConfig(format=u'%(filename)s [LINE:%(lineno)d] #%(levelname)-8s [%(asctime)s]  %(message)s',
+#                     level=logging.INFO,
+#                     )
 
 loop = asyncio.get_event_loop()
 
@@ -21,3 +21,7 @@ dp = Dispatcher(bot, storage=storage)
 
 i18n = setup_middleware(dp)
 _ = i18n.gettext
+
+
+def get_all_language_variants(i18n_word):
+    return [_(i18n_word, locale=locale) for locale in ['uz', 'ru']]

@@ -3,13 +3,11 @@ from typing import Tuple, Any, Optional
 from aiogram import types
 from aiogram.contrib.middlewares.i18n import I18nMiddleware
 from config import I18N_DOMAIN, LOCALES_DIR
-from utils.db_api.database import DBCommands
-
-db = DBCommands()
+from utils.db_api.models.user import User
 
 
 async def get_lang(user_id):
-    user = await db.get_user(user_id)
+    user = await User.get_user(user_id)
     if user:
         return user.language
 

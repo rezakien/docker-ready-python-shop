@@ -1,7 +1,6 @@
 #!/bin/bash
-
-pybabel extract . -o locales/testbot.pot
+pybabel extract . -o locales/shop-bot.pot
 for Item in ru uz;
   do
-    pybabel init -i locales/testbot.pot -d locales -D testbot -l $Item
+    pybabel init -i locales/shop-bot.pot -d locales -D shop-bot -l $Item
   done

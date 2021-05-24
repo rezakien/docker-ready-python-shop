@@ -1,0 +1,81 @@
+# Uzbek translations for PROJECT.
+# Copyright (C) 2021 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2021-05-23 21:23+0500\n"
+"PO-Revision-Date: 2021-05-23 19:19+0500\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: uz\n"
+"Language-Team: uz <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: handlers/users/menu.py:17 handlers/users/menu.py:22
+#: keyboards/default/menu_keyboard.py:7 keyboards/default/menu_keyboard.py:15
+msgid "Категории 🗂"
+msgstr "Kategoriyalar 🗂"
+
+#: handlers/users/menu.py:17 handlers/users/menu.py:25
+#: keyboards/default/menu_keyboard.py:7
+msgid "Корзина 🛒"
+msgstr "Savat 🛒"
+
+#: handlers/users/menu.py:17 handlers/users/menu.py:28
+#: keyboards/default/menu_keyboard.py:8
+msgid "Заказы 📦"
+msgstr "Buyurtmalar 📦"
+
+#: handlers/users/menu.py:17 handlers/users/menu.py:31
+#: keyboards/default/menu_keyboard.py:8
+msgid "Помощь ❓"
+msgstr "Yordam ❓"
+
+#: handlers/users/menu.py:17 handlers/users/menu.py:34
+#: keyboards/default/menu_keyboard.py:9 keyboards/default/menu_keyboard.py:16
+msgid "Изменить язык 🌐"
+msgstr "Tilni o'zgartirish 🌐"
+
+#: handlers/users/menu.py:23
+msgid "Выберите категорию 👇🏻"
+msgstr "Kategoriyani tanlang"
+
+#: handlers/users/menu.py:26
+msgid "У вас пока нет товаров в корзине. "
+msgstr "Savatda tovarlar yo'q."
+
+#: handlers/users/menu.py:29
+msgid "У вас пока нет заказов."
+msgstr "Sizda hali buyurtma qilmagansiz."
+
+#: handlers/users/menu.py:32
+msgid "Здесь вы можете получить информацию о боте."
+msgstr "Bu yerda siz bo't haqida informaciya olsangiz bo'ladi."
+
+#: handlers/users/menu.py:35
+msgid "Выберите язык:"
+msgstr "Tilni tanlang:"
+
+#: handlers/users/menu.py:44
+msgid "Язык изменен."
+msgstr "Til o'zgardi."
+
+#: handlers/users/start.py:17
+msgid "Нажмите кнопку:"
+msgstr "Kno'pkani bosing:"
+
+#: keyboards/default/menu_keyboard.py:15
+msgid "Товары 🗂"
+msgstr "Tovarlar 🗂"
+
+#: keyboards/default/menu_keyboard.py:16
+msgid "Заказы 🗂"
+msgstr "Buyurtmalar 🗂"
+

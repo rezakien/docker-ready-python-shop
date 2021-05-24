@@ -1,1 +1,1 @@
-pybabel compile -d locales -D testbot
+pybabel compile -d locales -D shop-bot

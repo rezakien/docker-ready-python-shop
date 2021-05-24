@@ -1,48 +1,117 @@
 import asyncio
-import logging
 from typing import Union
 
-from aiogram.types import Message, ReplyKeyboardRemove
+from aiogram.types import Message, ReplyKeyboardRemove, User
 from aiogram.dispatcher.filters import Text
 from aiogram.types import CallbackQuery
 
-from keyboards.default import menu_keyboard
+from keyboards.default import get_menu_keyboard
+
 from keyboards.inline.callbacks import lang_callback
-from keyboards.inline.lang_keyboard import lang_keyboard
-from loader import dp, _
-from utils.db_api.database import DBCommands
+from keyboards.inline.callbacks import category_callback
 
-db = DBCommands()
+from keyboards.inline.lang_keyboard import get_lang_keyboard
+from keyboards.inline.menu_keyboard import get_categories_keyboard, get_subcategories_keyboard, get_items_keyboard, \
+    item_keyboard
+
+from loader import dp, _, get_all_language_variants
+from utils.db_api import Item
+from utils.db_api.models.user import User
 
 
-@dp.message_handler(Text(equals=[_("Каталог"), _("Корзина"), _("Мои заказы"), _("Помощь"), _("Изменить язык")]))
-async def menu_handler(message: Message):
-    menu_category = message.text
-    text = ""
-    if menu_category == _("Каталог"):
-        text = _("Выберите категорию👇🏻")
-        await message.answer(f"{text}", reply_markup=ReplyKeyboardRemove())
-    if menu_category == _("Корзина"):
-        text = _("У вас пока нет товаров в корзине.")
-        await message.answer(f"{text}", reply_markup=ReplyKeyboardRemove())
-    if menu_category == _("Мои заказы"):
-        text = _("У вас пока нет заказов.")
-        await message.answer(f"{text}", reply_markup=ReplyKeyboardRemove())
-    if menu_category == _("Помощь"):
-        text = _("Здесь вы можете получить информацию о боте.")
-        await message.answer(f"{text}", reply_markup=ReplyKeyboardRemove())
-    if menu_category == _("Изменить язык"):
-        text = _("Выберите язык")
-        await message.answer(f"{text}", reply_markup=lang_keyboard)
+@dp.message_handler(Text(equals=get_all_language_variants("Категории 🗂")))
+async def menu_category_handler(message: Message):
+    text = _("Выберите категорию 👇🏻")
+    reply_markup = await get_categories_keyboard()
+    await message.answer(f"{text}", reply_markup=reply_markup)
+
+
+@dp.message_handler(Text(equals=get_all_language_variants("Корзина 🛒")))
+async def menu_cart_handler(message: Message):
+    text = _("У вас пока нет товаров в корзине. ")
+    reply_markup = None
+    await message.answer(f"{text}", reply_markup=reply_markup)
+
+
+@dp.message_handler(Text(equals=get_all_language_variants("Заказы 📦")))
+async def menu_orders_handler(message: Message):
+    text = _("У вас пока нет заказов.")
+    reply_markup = None
+    await message.answer(f"{text}", reply_markup=reply_markup)
+
+
+@dp.message_handler(Text(equals=get_all_language_variants("Помощь ❓")))
+async def menu_help_handler(message: Message):
+    text = _("Здесь вы можете получить информацию о боте.")
+    reply_markup = None
+    await message.answer(f"{text}", reply_markup=reply_markup)
+
+
+@dp.message_handler(Text(equals=get_all_language_variants("Изменить язык 🌐")))
+async def menu_language_handler(message: Message):
+    text = _("Выберите язык:")
+    reply_markup = get_lang_keyboard()
+    await message.answer(f"{text}", reply_markup=reply_markup)
 
 
 @dp.callback_query_handler(lang_callback.filter())
 async def lang_handler(call: CallbackQuery, callback_data: dict):
+    await call.answer(cache_time=1)
     lang = callback_data.get("lang")
-    await db.set_language(lang)
-    lang_text = 'русский язык.'
-    if lang == 'uz':
-        lang_text = "O'zbek"
-    text = _("Вы выбрали {lang}".format(lang=lang_text), locale=lang)
+    await User.set_language(lang)
+    text = _("Язык изменен.", locale=lang)
     await call.message.edit_reply_markup()
-    await call.message.answer(text, reply_markup=menu_keyboard)
+    await call.message.answer(text=text, reply_markup=get_menu_keyboard(lang))
+
+
+@dp.callback_query_handler(category_callback.filter())
+async def categories_handler(call: CallbackQuery, callback_data: dict):
+    await call.answer(cache_time=1)
+    current_level = "0"
+    category = int(callback_data.get("category"))
+    item_id = int(callback_data.get("item_id"))
+    show_items = callback_data.get("show_items")
+    
+    levels = {
+        "0": list_categories,
+        "1": list_subcategories,
+        "2": list_items,
+        "3": show_item,
+    }
+    if category == "0":
+        current_level = "0"
+    if category != "0":
+        current_level = "1"
+    if show_items == "True":
+        current_level = "2"
+    if item_id != 0:
+        current_level = "3"
+    current_level_function = levels[current_level]
+
+    await current_level_function(call, category=category, item_id=item_id)
+
+
+async def list_categories(message: Union[Message, CallbackQuery], **kwargs):
+    markup = await get_categories_keyboard()
+
+    if isinstance(message, Message):
+        await message.answer("Смотри, что у нас есть", reply_markup=markup)
+    elif isinstance(message, CallbackQuery):
+        await message.message.edit_reply_markup(markup)
+
+
+async def list_subcategories(callback: CallbackQuery, category, **kwargs):
+    markup = await get_subcategories_keyboard(category)
+    await callback.message.edit_reply_markup(markup)
+
+
+async def list_items(callback: CallbackQuery, category, **kwargs):
+    markup = await get_items_keyboard(category)
+    await callback.message.edit_text(text="Смотри, что у нас есть", reply_markup=markup)
+
+
+async def show_item(callback: CallbackQuery, category, item_id, **kwargs):
+    markup = item_keyboard(category, item_id)
+    item = await Item.get_item(item_id)
+    text = f"{item}"
+    await callback.message.edit_text(text=text, reply_markup=markup)
