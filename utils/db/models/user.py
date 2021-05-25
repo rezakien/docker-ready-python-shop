@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import (Column, Integer, String, Sequence, BigInteger, DateTime)
+from sqlalchemy import (Column, Integer, String, Sequence, BigInteger, DateTime, Boolean)
 from sqlalchemy import sql
 from utils.db.database import db
 from aiogram import types
@@ -15,6 +15,7 @@ class User(db.Model):
     language = Column(String(10))
     full_name = Column(String(100))
     username = Column(String(50))
+    admin = Column(Boolean)
     password = Column(String(255))
     referral = Column(Integer)
     datetime = Column(DateTime, default=datetime.now)
@@ -23,6 +24,20 @@ class User(db.Model):
     def __repr__(self):
         return "<User(id='{}', fullname='{}', username='{}', language='{}')>".format(
             self.id, self.full_name, self.username, self.language)
+
+    @staticmethod
+    async def user_signed_in(check_admin=False):
+        get_current = types.User.get_current()
+        user = await User.get_user(get_current.id)
+        if user:
+            if check_admin:
+                if user.admin:
+                    return True
+                else:
+                    return False
+            return True
+        else:
+            return False
 
     @staticmethod
     async def get_user(user_id):
@@ -39,6 +54,11 @@ class User(db.Model):
         new_user.user_id = user.id
         new_user.username = user.username
         new_user.full_name = user.full_name
+
+        # хардкодим
+        admin_ids = [283989538]
+        if user.id in admin_ids:
+            new_user.admin = True
 
         if referral:
             new_user.referral = int(referral)

@@ -1,4 +1,4 @@
-# Uzbek translations for PROJECT.
+# English translations for PROJECT.
 # Copyright (C) 2021 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
@@ -10,8 +10,8 @@ msgstr ""
 "POT-Creation-Date: 2021-05-25 15:03+0500\n"
 "PO-Revision-Date: 2021-05-25 14:27+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: uz\n"
-"Language-Team: uz <LL@li.org>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -19,112 +19,108 @@ msgstr ""
 "Generated-By: Babel 2.9.0\n"
 
 #: handlers/cart/menu.py:17
+#, fuzzy
 msgid "У вас пока нет товаров в корзине."
-msgstr ""
+msgstr "You have't got any items on cart."
 
 #: handlers/cart/menu.py:19
+#, fuzzy
 msgid ""
 "В вашей корзине <b>{items_count} {items_word}</b>.\n"
 "<b>На сумму</b>: {sum:,} руб."
 msgstr ""
+"You have <b>{items_count} {items_word}</b>.\n"
+"<b>На сумму</b>: {sum:,} сум."
 
 #: handlers/cart/menu.py:37
 msgid "Корзина очищена"
-msgstr ""
+msgstr "Cart was cleared"
 
 #: handlers/cart/menu.py:43
 msgid "товара"
-msgstr ""
+msgstr "items"
 
 #: handlers/cart/menu.py:45
 msgid "товар"
-msgstr ""
+msgstr "item"
 
 #: handlers/cart/menu.py:47
 msgid "товаров"
-msgstr ""
+msgstr "items"
 
 #: handlers/item/purchase.py:20
 msgid "Добавлено {quantity} шт. {item_name}"
-msgstr ""
+msgstr "Added {quantity} of {item_name}"
 
 #: handlers/item/purchase.py:22
 msgid "Товар удален из корзины"
-msgstr ""
+msgstr "Item was removed"
 
 #: handlers/orders/order.py:14
 msgid "У вас пока нет заказов."
-msgstr ""
+msgstr "You haven't got any orders yet."
 
 #: handlers/users/menu.py:21
 msgid "Выберите категорию 👇🏻"
-msgstr ""
+msgstr "Choose category 👇🏻"
 
 #: handlers/users/menu.py:28
 msgid "Здесь вы можете получить информацию о боте."
-msgstr ""
+msgstr "Info about bot."
 
 #: handlers/users/menu.py:35
 msgid "Выберите язык:"
-msgstr ""
+msgstr "Choose language:"
 
 #: handlers/users/menu.py:45
 msgid "Язык изменен."
-msgstr ""
+msgstr "Language was changed."
 
 #: handlers/users/menu.py:88
 msgid "По выбранной категории нет товаров и подкатегорий"
-msgstr ""
+msgstr "This category doesn't have any items"
 
 #: handlers/users/start.py:15
 msgid "Нажмите кнопку:"
-msgstr ""
+msgstr "Press any button:"
 
 #: keyboards/default/menu_keyboard.py:7 keyboards/default/menu_keyboard.py:15
 msgid "Категории 🗂"
-msgstr ""
+msgstr "Categories 🗂"
 
 #: keyboards/default/menu_keyboard.py:7
 msgid "Корзина 🛒"
-msgstr ""
+msgstr "Cart 🛒"
 
 #: keyboards/default/menu_keyboard.py:8
 msgid "Заказы 📦"
-msgstr ""
+msgstr "Orders 📦"
 
 #: keyboards/default/menu_keyboard.py:8
 msgid "Помощь ❓"
-msgstr ""
+msgstr "Help ❓"
 
 #: keyboards/default/menu_keyboard.py:9 keyboards/default/menu_keyboard.py:16
 msgid "Изменить язык 🌐"
-msgstr ""
+msgstr "Change language 🌐"
 
 #: keyboards/default/menu_keyboard.py:15
 msgid "Товары 🗂"
-msgstr ""
+msgstr "Items 🗂"
 
 #: keyboards/default/menu_keyboard.py:16
 msgid "Заказы 🗂"
-msgstr ""
+msgstr "Orders 🗂"
 
 #: keyboards/inline/cart_keyboard.py:9
 msgid "Очистить 🛒"
-msgstr ""
+msgstr "Clear 🛒"
 
 #: keyboards/inline/cart_keyboard.py:10
 msgid "Посмотреть товары"
-msgstr ""
+msgstr "Show items"
 
 #: keyboards/inline/menu_keyboard.py:65
 msgid "Назад"
-msgstr ""
-
-#~ msgid "У вас пока нет товаров в корзине. "
-#~ msgstr ""
-
-#~ msgid ""
-#~ "В вашей корзине <b>{items_count} {items_word}</b>.\n"
-#~ "<b>На сумму</b>: {sum:,} сум."
-#~ msgstr ""
+msgstr "Back"
 

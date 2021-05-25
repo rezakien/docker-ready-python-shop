@@ -17,10 +17,10 @@ def get_integer_price(length):
 
 
 async def add_items():
-    categories = await Category.all_subcategories()
-    if categories is not None:
+    categories = await Category.all_parents()
+    if len(categories) > 0:
         for i in range(50):
-            random_name = "Корм " + get_random_string(6)
+            random_name = "Товар №" + str(i+1)
             random_category_id = categories[random.randint(0, len(categories) - 1)].id
             random_price = get_integer_price(3)
             await Item.create_item(name=random_name, price=random_price, category_id=random_category_id)

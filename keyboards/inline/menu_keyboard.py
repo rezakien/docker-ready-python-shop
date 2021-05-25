@@ -3,6 +3,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from keyboards.inline.callbacks import make_callback_data, item_callback
 from loader import _
 from utils.db import Category
+from constants.lang import UNITS
 
 
 async def get_categories_keyboard():
@@ -36,7 +37,7 @@ async def get_subcategories_keyboard(category_id):
             InlineKeyboardButton(text=text, callback_data=callback_data)
         )
 
-    if current_category_items_count > 0 and len(sub_categories) > 0:
+    if current_category_items_count > 0 or len(sub_categories) > 0:
         markup.row(
             InlineKeyboardButton(
                 text=f"Посмотреть товары {current_category_items_count} шт.",
@@ -67,19 +68,19 @@ def get_back_button(category_id):
     )
 
 
-def item_keyboard(item_id):
+def item_keyboard(item_id, place='category'):
     inline_keyboard = [InlineKeyboardButton(
-        text="+25 кг",
-        callback_data=item_callback.new(item_id=item_id, quantity=25)
+        text="+25",
+        callback_data=item_callback.new(item_id=item_id, quantity=25, place=place)
     ), InlineKeyboardButton(
-        text="+100 кг",
-        callback_data=item_callback.new(item_id=item_id, quantity=100)
+        text="+100",
+        callback_data=item_callback.new(item_id=item_id, quantity=100, place=place)
     ), InlineKeyboardButton(
-        text="+500 кг",
-        callback_data=item_callback.new(item_id=item_id, quantity=500)
+        text="+500",
+        callback_data=item_callback.new(item_id=item_id, quantity=500, place=place)
     ), InlineKeyboardButton(
         text="🗑",
-        callback_data=item_callback.new(item_id=item_id, quantity=0)
+        callback_data=item_callback.new(item_id=item_id, quantity=0, place=place)
     )]
     markup = InlineKeyboardMarkup(resize_keyboard=True)
     markup.row(*inline_keyboard)

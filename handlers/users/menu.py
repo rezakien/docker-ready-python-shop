@@ -15,6 +15,8 @@ from loader import dp, _, get_all_language_variants
 from utils.db import Item
 from utils.db.models.user import User
 
+from utils.helpers.decorators import user_sign_in_message, user_sign_in_callback
+
 
 @dp.message_handler(Text(equals=get_all_language_variants("Категории 🗂")))
 async def menu_category_handler(message: Message):
@@ -31,6 +33,7 @@ async def menu_help_handler(message: Message):
 
 
 @dp.message_handler(Text(equals=get_all_language_variants("Изменить язык 🌐")))
+@user_sign_in_message
 async def menu_language_handler(message: Message):
     text = _("Выберите язык:")
     reply_markup = get_lang_keyboard()
@@ -38,6 +41,7 @@ async def menu_language_handler(message: Message):
 
 
 @dp.callback_query_handler(language_callback.filter())
+@user_sign_in_callback
 async def lang_handler(call: CallbackQuery, callback_data: dict):
     await call.answer(cache_time=1)
     lang = callback_data.get("lang")
@@ -93,7 +97,7 @@ async def list_items(callback: CallbackQuery, category, **kwargs):
     await callback.message.edit_reply_markup(reply_markup=markup)
 
 
-async def show_item(callback: CallbackQuery, category, item_id, **kwargs):
+async def show_item(callback: CallbackQuery, item_id, **kwargs):
     markup = item_keyboard(item_id)
     item = await Item.get_item(item_id)
     text = f"{item}"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-05-23 21:23+0500\n"
-"PO-Revision-Date: 2021-05-23 19:19+0500\n"
+"POT-Creation-Date: 2021-05-25 15:03+0500\n"
+"PO-Revision-Date: 2021-05-25 14:27+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -19,44 +19,49 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: handlers/users/menu.py:17 handlers/users/menu.py:22
-#: keyboards/default/menu_keyboard.py:7 keyboards/default/menu_keyboard.py:15
-msgid "Категории 🗂"
+#: handlers/cart/menu.py:17
+msgid "У вас пока нет товаров в корзине."
 msgstr ""
 
-#: handlers/users/menu.py:17 handlers/users/menu.py:25
-#: keyboards/default/menu_keyboard.py:7
-msgid "Корзина 🛒"
+#: handlers/cart/menu.py:19
+msgid ""
+"В вашей корзине <b>{items_count} {items_word}</b>.\n"
+"<b>На сумму</b>: {sum:,} руб."
 msgstr ""
 
-#: handlers/users/menu.py:17 handlers/users/menu.py:28
-#: keyboards/default/menu_keyboard.py:8
-msgid "Заказы 📦"
+#: handlers/cart/menu.py:37
+msgid "Корзина очищена"
 msgstr ""
 
-#: handlers/users/menu.py:17 handlers/users/menu.py:31
-#: keyboards/default/menu_keyboard.py:8
-msgid "Помощь ❓"
+#: handlers/cart/menu.py:43
+msgid "товара"
 msgstr ""
 
-#: handlers/users/menu.py:17 handlers/users/menu.py:34
-#: keyboards/default/menu_keyboard.py:9 keyboards/default/menu_keyboard.py:16
-msgid "Изменить язык 🌐"
+#: handlers/cart/menu.py:45
+msgid "товар"
 msgstr ""
 
-#: handlers/users/menu.py:23
-msgid "Выберите категорию 👇🏻"
+#: handlers/cart/menu.py:47
+msgid "товаров"
 msgstr ""
 
-#: handlers/users/menu.py:26
-msgid "У вас пока нет товаров в корзине. "
+#: handlers/item/purchase.py:20
+msgid "Добавлено {quantity} шт. {item_name}"
 msgstr ""
 
-#: handlers/users/menu.py:29
+#: handlers/item/purchase.py:22
+msgid "Товар удален из корзины"
+msgstr ""
+
+#: handlers/orders/order.py:14
 msgid "У вас пока нет заказов."
 msgstr ""
 
-#: handlers/users/menu.py:32
+#: handlers/users/menu.py:21
+msgid "Выберите категорию 👇🏻"
+msgstr ""
+
+#: handlers/users/menu.py:28
 msgid "Здесь вы можете получить информацию о боте."
 msgstr ""
 
@@ -64,12 +69,36 @@ msgstr ""
 msgid "Выберите язык:"
 msgstr ""
 
-#: handlers/users/menu.py:44
+#: handlers/users/menu.py:45
 msgid "Язык изменен."
 msgstr ""
 
-#: handlers/users/start.py:17
+#: handlers/users/menu.py:88
+msgid "По выбранной категории нет товаров и подкатегорий"
+msgstr ""
+
+#: handlers/users/start.py:15
 msgid "Нажмите кнопку:"
+msgstr ""
+
+#: keyboards/default/menu_keyboard.py:7 keyboards/default/menu_keyboard.py:15
+msgid "Категории 🗂"
+msgstr ""
+
+#: keyboards/default/menu_keyboard.py:7
+msgid "Корзина 🛒"
+msgstr ""
+
+#: keyboards/default/menu_keyboard.py:8
+msgid "Заказы 📦"
+msgstr ""
+
+#: keyboards/default/menu_keyboard.py:8
+msgid "Помощь ❓"
+msgstr ""
+
+#: keyboards/default/menu_keyboard.py:9 keyboards/default/menu_keyboard.py:16
+msgid "Изменить язык 🌐"
 msgstr ""
 
 #: keyboards/default/menu_keyboard.py:15
@@ -79,4 +108,24 @@ msgstr ""
 #: keyboards/default/menu_keyboard.py:16
 msgid "Заказы 🗂"
 msgstr ""
+
+#: keyboards/inline/cart_keyboard.py:9
+msgid "Очистить 🛒"
+msgstr ""
+
+#: keyboards/inline/cart_keyboard.py:10
+msgid "Посмотреть товары"
+msgstr ""
+
+#: keyboards/inline/menu_keyboard.py:65
+msgid "Назад"
+msgstr ""
+
+#~ msgid "У вас пока нет товаров в корзине. "
+#~ msgstr ""
+
+#~ msgid ""
+#~ "В вашей корзине <b>{items_count} {items_word}</b>.\n"
+#~ "<b>На сумму</b>: {sum:,} сум."
+#~ msgstr ""
 

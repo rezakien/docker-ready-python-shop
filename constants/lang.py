@@ -1,8 +1,17 @@
 LANGUAGES = [{
-    "title": "Русский",
+    "title": "Русский 🇷🇺",
     "prefix": "ru"
 }, {
-    "title": "O'zbek",
-    "prefix": "uz"
+    "title": "English 🇺🇸",
+    "prefix": "en"
+}, {
+     "title": "O'zbek 🇺🇿",
+     "prefix": "uz"
 },
 ]
+
+UNITS = {
+    'us': '$',
+    'kg': 'кг.',
+    'sum': 'сум.'
+}

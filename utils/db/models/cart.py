@@ -28,7 +28,7 @@ class Cart(db.Model):
             if cart_item is None:
                 return await Cart(**kwargs).create()
             else:
-                return await cart_item.update(quantity=cart_item.quantity+kwargs["quantity"]).apply()
+                return await cart_item.update(quantity=cart_item.quantity + kwargs["quantity"]).apply()
         else:
             if cart_item is not None:
                 return await cart_item.delete()
@@ -45,12 +45,29 @@ class Cart(db.Model):
     async def get_cart_sum():
         current = types.User.get_current()
         user = await User.get_user(current.id)
-        return await db.select([db.func.sum(Cart.quantity * Item.price)]).select_from(Cart.join(Item)).where(Cart.user_id == user.id).gino.scalar()
+        return await db.select([db.func.sum(Cart.quantity * Item.price)]).select_from(Cart.join(Item)).where(
+            Cart.user_id == user.id).gino.scalar()
+
+    @staticmethod
+    async def get_cart_items():
+        current = types.User.get_current()
+        user = await User.get_user(current.id)
+        cart_items = await Cart.query.where(Cart.user_id == user.id).gino.all()
+        return cart_items
+
+    @staticmethod
+    async def get_cart_item(item_id):
+        current = types.User.get_current()
+        user = await User.get_user(current.id)
+        conditions = [
+            Cart.user_id == user.id,
+            Cart.item_id == item_id,
+        ]
+        cart_item = await Cart.query.where(and_(*conditions)).gino.first()
+        return cart_item
 
     @staticmethod
     async def clear_cart():
-        current = types.User.get_current()
-        user = await User.get_user(current.id)
-        cart_items =  await Cart.query.where(Cart.user_id == user.id).gino.all()
+        cart_items = await Cart.get_cart_items()
         for cart_item in cart_items:
             await cart_item.delete()
