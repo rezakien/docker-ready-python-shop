@@ -81,7 +81,11 @@ async def list_categories(callback: CallbackQuery, **kwargs):
 
 async def list_subcategories(callback: CallbackQuery, category, **kwargs):
     markup = await get_subcategories_keyboard(category)
-    await callback.message.edit_reply_markup(markup)
+    if len(markup.inline_keyboard) > 0:
+        await callback.message.edit_reply_markup(markup)
+    else:
+        await callback.message.edit_reply_markup()
+        await callback.message.edit_text(text=_("По выбранной категории нет товаров и подкатегорий"))
 
 
 async def list_items(callback: CallbackQuery, category, **kwargs):

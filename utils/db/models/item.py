@@ -22,8 +22,8 @@ class Item(db.Model):
     active = Column(Boolean, default=True)
 
     def __repr__(self):
-        return "Товар: <b>{}</b>" \
-               "\nЦена: <b>{}</b> сум.".format(self.name, self.price)
+        return "Товар: <b>{name}</b>" \
+               "\nЦена: <b>{price:,}</b> сум.".format(name=self.name, price=self.price)
 
     @staticmethod
     async def all_items():

@@ -14,9 +14,10 @@ async def item_cart_resolve(call: CallbackQuery, callback_data: dict):
     quantity = int(callback_data.get("quantity"))
     item = await Item.get_item(item_id)
     text = ""
-    await Cart.create_update_item(item_id=item.id, user_id=user.id, quantity=quantity)
-    if quantity > 0:
-        text = _("Добавлено {quantity} шт. {item_name}".format(quantity=quantity, item_name=item.name))
-    if quantity == 0:
-        text = _("Товар удален из корзины".format(item.name))
+    res = await Cart.create_update_item(item_id=item.id, user_id=user.id, quantity=quantity)
+    if res:
+        if quantity > 0:
+            text = _("Добавлено {quantity} шт. {item_name}".format(quantity=quantity, item_name=item.name))
+        if quantity == 0:
+            text = _("Товар удален из корзины".format(item.name))
     await call.answer(text=text, cache_time=1)

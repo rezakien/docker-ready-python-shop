@@ -35,7 +35,7 @@ async def cart_callback_handler(call: CallbackQuery, callback_data: dict):
     if action == 'clear_cart':
         await Cart.clear_cart()
         text = _("Корзина очищена")
-    await call.message.answer(text=text, reply_markup=reply_markup)
+        await call.message.edit_text(text=text)
 
 
 def get_word_items(count):

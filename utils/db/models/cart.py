@@ -31,7 +31,9 @@ class Cart(db.Model):
                 return await cart_item.update(quantity=cart_item.quantity+kwargs["quantity"]).apply()
         else:
             if cart_item is not None:
-                await cart_item.delete()
+                return await cart_item.delete()
+            else:
+                return False
 
     @staticmethod
     async def get_cart():

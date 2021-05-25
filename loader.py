@@ -8,9 +8,9 @@ from aiogram.types import ParseMode
 import config
 from language_middleware import setup_middleware
 
-# logging.basicConfig(format=u'%(filename)s [LINE:%(lineno)d] #%(levelname)-8s [%(asctime)s]  %(message)s',
-#                     level=logging.INFO,
-#                     )
+logging.basicConfig(format=u'%(filename)s [LINE:%(lineno)d] #%(levelname)-8s [%(asctime)s]  %(message)s',
+                    level=logging.INFO,
+                    )
 
 loop = asyncio.get_event_loop()
 
