@@ -3,7 +3,6 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from keyboards.inline.callbacks import make_callback_data, item_callback
 from loader import _
 from utils.db import Category
-from constants.lang import UNITS
 
 
 async def get_categories_keyboard():
@@ -37,7 +36,7 @@ async def get_subcategories_keyboard(category_id):
             InlineKeyboardButton(text=text, callback_data=callback_data)
         )
 
-    if current_category_items_count > 0 or len(sub_categories) > 0:
+    if current_category_items_count > 0:
         markup.row(
             InlineKeyboardButton(
                 text=f"Посмотреть товары {current_category_items_count} шт.",
@@ -54,7 +53,7 @@ async def get_items_keyboard(category_id):
         for item in items:
             callback_data = make_callback_data(category=category_id,
                                                item_id=item.id)
-            button_text = "{name} - {price:,} сум.".format(name=item.name, price=item.price)
+            button_text = "{name} - {price:,} сум.".format(name=item.name, price=0)
             markup.insert(
                 InlineKeyboardButton(text=button_text, callback_data=callback_data)
             )

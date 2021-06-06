@@ -19,15 +19,16 @@ async def get_items_with_keyboard(call: CallbackQuery):
     if len(cart_items) > 0:
         for cart_item in cart_items:
             item = await Item.get_item(cart_item.item_id)
-            text = get_cart_item_text(cart_item, item)
+            text = await get_cart_item_text(cart_item, item)
             reply_markup = item_keyboard(item.id, 'cart')
             await call.message.answer(text=text, reply_markup=reply_markup)
 
 
-def get_cart_item_text(cart_item, item):
+async def get_cart_item_text(cart_item, item):
+    price = await Item.get_price(cart_item.quantity)
     return _("<b>Товар:</b> {item_name}\n"
              "<b>Цена за кг:</b> {price:,} сум.\n"
              "<b>Количество:</b> {quantity} кг.\n"
-             "<b>Стоимость товара: </b> {summary} сум.".format(item_name=item.name, price=item.price,
+             "<b>Стоимость товара: </b> {summary} сум.".format(item_name=item.name, price=price,
                                                                quantity=cart_item.quantity,
-                                                               summary=item.price * cart_item.quantity))
+                                                               summary=cart_item.quantity*price))

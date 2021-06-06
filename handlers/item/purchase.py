@@ -26,7 +26,7 @@ async def item_cart_resolve(call: CallbackQuery, callback_data: dict):
             if place == 'cart':
                 cart_item = await Cart.get_cart_item(item_id)
                 if cart_item:
-                    text_in_cart = get_cart_item_text(cart_item, item)
+                    text_in_cart = await get_cart_item_text(cart_item, item)
                     reply_markup = item_keyboard(item.id, 'cart')
                     await call.message.edit_text(text=text_in_cart, reply_markup=reply_markup)
         if quantity == 0:

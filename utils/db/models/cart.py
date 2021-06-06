@@ -1,9 +1,9 @@
 from datetime import datetime
 
 from aiogram import types
-from sqlalchemy import Column, Integer, Sequence, ForeignKey, DateTime, sql, and_
+from sqlalchemy import Column, Integer, Sequence, ForeignKey, DateTime, sql, and_, or_
 
-from utils.db import User, Item
+from utils.db import User, Item, Price
 from utils.db.database import db
 
 
@@ -45,8 +45,21 @@ class Cart(db.Model):
     async def get_cart_sum():
         current = types.User.get_current()
         user = await User.get_user(current.id)
-        return await db.select([db.func.sum(Cart.quantity * Item.price)]).select_from(Cart.join(Item)).where(
-            Cart.user_id == user.id).gino.scalar()
+        cart_items = await Cart.query.where(Cart.user_id == user.id).gino.all()
+        summary = 0
+        for cart_item in cart_items:
+            item_prices = await Price.query.where(Price.item_id == cart_item.item_id).order_by(Price.min_quantity.asc()).gino.all()
+            price = None
+            for item_price in item_prices:
+                if cart_item.quantity >= item_price.min_quantity and cart_item.quantity < item_price.max_quantity:
+                    price = item_price.price
+                    break
+                elif cart_item.quantity < item_price.min_quantity:
+                    item = await Item.get_item(cart_item.item_id)
+                    price = item.price
+                    break
+            summary += price * cart_item.quantity
+        return summary
 
     @staticmethod
     async def get_cart_items():

@@ -1,7 +1,6 @@
 from .models.user import User
 from .models.item import Item
 from .models.price import Price
-from .models.item_price import ItemPrice
 from .models.category import Category
 from .models.cart import Cart
 from .models.order import Order

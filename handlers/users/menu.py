@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from aiogram.types import Message, User
 from aiogram.dispatcher.filters import Text
 from aiogram.types import CallbackQuery
@@ -14,6 +16,7 @@ from keyboards.inline.menu_keyboard import get_categories_keyboard, get_subcateg
 from loader import dp, _, get_all_language_variants
 from utils.db import Item
 from utils.db.models.user import User
+import logging
 
 from utils.helpers.decorators import user_sign_in_message, user_sign_in_callback
 
@@ -101,4 +104,9 @@ async def show_item(callback: CallbackQuery, item_id, **kwargs):
     markup = item_keyboard(item_id)
     item = await Item.get_item(item_id)
     text = f"{item}"
-    await callback.message.edit_text(text=text, reply_markup=markup)
+
+    photo = await item.get_photo()
+    await callback.message.edit_reply_markup()
+    await callback.message.answer_photo(photo=photo, caption=text, reply_markup=markup)
+
+

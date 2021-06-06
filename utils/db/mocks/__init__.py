@@ -1,1 +1,1 @@
-from .add_categories import *
+from .add_to_database import *
