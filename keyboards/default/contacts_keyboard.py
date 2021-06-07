@@ -17,7 +17,7 @@ def get_contacts_keyboard(locale=None):
 def get_contact_keyboard(locale=None):
     markup = ReplyKeyboardMarkup(resize_keyboard=True, keyboard=[
         [
-            KeyboardButton(_("Контакт 📞", locale=locale), request_contact=True),
+            KeyboardButton(_("Отправить контакт 📞", locale=locale), request_contact=True),
         ],
     ])
     return markup
@@ -26,7 +26,7 @@ def get_contact_keyboard(locale=None):
 def get_location_keyboard(locale=None):
     markup = ReplyKeyboardMarkup(resize_keyboard=True, keyboard=[
         [
-            KeyboardButton(_("Локация 📍", locale=locale), request_location=True),
+            KeyboardButton(_("Отправить локацию 📍", locale=locale), request_location=True),
         ],
     ])
     return markup

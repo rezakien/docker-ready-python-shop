@@ -1,14 +1,19 @@
+import logging
+
 from aiogram import types
+from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
-from aiogram.types import Message, CallbackQuery
+from aiogram.types import Message, CallbackQuery, Location, ContentType
 
 from handlers.users.start import bot_start
 from keyboards.default import get_contacts_keyboard, get_menu_keyboard
+from keyboards.default.contacts_keyboard import get_location_keyboard, get_contact_keyboard
 from keyboards.inline.callbacks import cart_callback
 from keyboards.inline.cart_keyboard import get_cart_keyboard, get_items_with_keyboard
 from loader import dp, _, get_all_language_variants
+from states.order import OrderState
 from utils.db.models import Cart
-from utils.helpers.decorators import user_sign_in_message, user_sign_in_callback
+from utils.helpers.decorators import user_sign_in_message, user_sign_in_callback, user_sign_in_message_state
 
 
 def get_word_items(count):
@@ -71,5 +76,33 @@ async def menu_cart_back_handler(message: Message):
 
 @dp.message_handler(Text(equals=get_all_language_variants("Оформить заказ ✅")))
 @user_sign_in_message
-async def menu_cart_back_handler(message: Message):
-    pass
+async def menu_cart_order_handler(message: Message):
+    text = _("Пожалуйста, отправьте свою локацию")
+    reply_markup = get_location_keyboard()
+    await message.answer(text, reply_markup=reply_markup)
+    await OrderState.Location.set()
+
+
+@dp.message_handler(content_types=ContentType.LOCATION, state=OrderState.Location)
+@user_sign_in_message_state
+async def menu_cart_location_handler(message: ContentType.LOCATION, state: FSMContext):
+    async with state.proxy() as data:
+        data["location"] = message.location
+    if message is not None:
+        logging.info("latitude: %s; longitude: %s" % (message.location.latitude, message.location.longitude))
+    text = _("Пожалуйста, отправьте свой контакт")
+    reply_markup = get_contact_keyboard()
+    await message.answer(text, reply_markup=reply_markup)
+    await OrderState.Contact.set()
+
+
+@dp.message_handler(content_types=ContentType.CONTACT, state=OrderState.Contact)
+@user_sign_in_message_state
+async def menu_cart_contact_handler(message: ContentType.LOCATION, state: FSMContext):
+    async with state.proxy() as data:
+        data["contact"] = message.contact
+    if message is not None:
+        logging.info(message)
+    text = _("Заказ подтвержден! Ждите звонка, либо сообщения от нашего продавца.")
+    reply_markup = get_menu_keyboard()
+    await message.answer(text, reply_markup=reply_markup)
