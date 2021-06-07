@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-05-25 15:03+0500\n"
+"POT-Creation-Date: 2021-06-08 04:48+0500\n"
 "PO-Revision-Date: 2021-05-25 14:27+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -16,75 +16,141 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
+"Generated-By: Babel 2.9.1\n"
 
-#: handlers/cart/menu.py:17
+#: handlers/cart/menu.py:20
+msgid "товара"
+msgstr "items"
+
+#: handlers/cart/menu.py:22
+msgid "товар"
+msgstr "item"
+
+#: handlers/cart/menu.py:24
+msgid "товаров"
+msgstr "items"
+
+#: handlers/cart/menu.py:35
 #, fuzzy
 msgid "У вас пока нет товаров в корзине."
 msgstr "You have't got any items on cart."
 
-#: handlers/cart/menu.py:19
+#: handlers/cart/menu.py:37
 #, fuzzy
 msgid ""
 "В вашей корзине <b>{items_count} {items_word}</b>.\n"
-"<b>На сумму</b>: {sum:,} руб."
+"<b>На сумму</b>: {sum:,} сум."
 msgstr ""
 "You have <b>{items_count} {items_word}</b>.\n"
 "<b>На сумму</b>: {sum:,} сум."
 
-#: handlers/cart/menu.py:37
+#: handlers/cart/menu.py:54
 msgid "Корзина очищена"
 msgstr "Cart was cleared"
 
-#: handlers/cart/menu.py:43
-msgid "товара"
-msgstr "items"
+#: handlers/cart/menu.py:59
+#, fuzzy
+msgid "Просмотр товаров в корзине"
+msgstr "You have't got any items on cart."
 
-#: handlers/cart/menu.py:45
-msgid "товар"
-msgstr "item"
+#: handlers/cart/menu.py:63
+msgid "Вы уверены, что хотите оформить заказ?"
+msgstr "Are you sure to order?"
 
-#: handlers/cart/menu.py:47
-msgid "товаров"
-msgstr "items"
+#: handlers/cart/menu.py:79
+msgid "Пожалуйста, отправьте свою локацию"
+msgstr "Please, send your location"
 
-#: handlers/item/purchase.py:20
-msgid "Добавлено {quantity} шт. {item_name}"
+#: handlers/cart/menu.py:92
+msgid "Пожалуйста, отправьте свой контакт"
+msgstr "Please, send your contacts"
+
+#: handlers/cart/menu.py:105
+msgid "Заказ подтвержден! Ждите звонка, либо сообщения от нашего продавца."
+msgstr "Order success!Wait for a call of operator."
+
+#: handlers/cart/menu.py:107
+msgid "Что-то пошло не так, повторите попытку."
+msgstr "Something went wrong. Retry, please."
+
+#: handlers/item/purchase.py:27
+#, fuzzy
+msgid "Добавлено {quantity} кг. {item_name} по {item_price:,} сум."
 msgstr "Added {quantity} of {item_name}"
 
-#: handlers/item/purchase.py:22
+#: handlers/item/purchase.py:29 handlers/item/purchase.py:52
 msgid "Товар удален из корзины"
 msgstr "Item was removed"
 
-#: handlers/orders/order.py:14
+#: handlers/item/purchase.py:33
+msgid "Минимальный объем товара составляет 100 кг."
+msgstr "The minimum volume of goods is 100 kg."
+
+#: handlers/item/purchase.py:35
+msgid "Произошла неизвестная ошибка при удалении"
+msgstr "An unknown error occurred while removing"
+
+#: handlers/item/purchase.py:54
+#, fuzzy
+msgid "Товар {item_name} удален из корзины"
+msgstr "Item {item_name} was removed from cart"
+
+#: handlers/orders/show_orders.py:16
 msgid "У вас пока нет заказов."
 msgstr "You haven't got any orders yet."
 
-#: handlers/users/menu.py:21
+#: handlers/users/menu.py:24
 msgid "Выберите категорию 👇🏻"
 msgstr "Choose category 👇🏻"
 
-#: handlers/users/menu.py:28
+#: handlers/users/menu.py:31
 msgid "Здесь вы можете получить информацию о боте."
 msgstr "Info about bot."
 
-#: handlers/users/menu.py:35
+#: handlers/users/menu.py:39
 msgid "Выберите язык:"
 msgstr "Choose language:"
 
-#: handlers/users/menu.py:45
+#: handlers/users/menu.py:50
 msgid "Язык изменен."
 msgstr "Language was changed."
 
-#: handlers/users/menu.py:88
+#: handlers/users/menu.py:87
+#, fuzzy
+msgid "Выберите подкатегорию 👇🏻"
+msgstr "Choose category 👇🏻"
+
+#: handlers/users/menu.py:91
 msgid "По выбранной категории нет товаров и подкатегорий"
 msgstr "This category doesn't have any items"
+
+#: handlers/users/menu.py:105
+#, fuzzy
+msgid "Выберите товар 👇🏻"
+msgstr "Choose category 👇🏻"
 
 #: handlers/users/start.py:15
 msgid "Нажмите кнопку:"
 msgstr "Press any button:"
 
-#: keyboards/default/menu_keyboard.py:7 keyboards/default/menu_keyboard.py:15
+#: keyboards/default/contacts_keyboard.py:8
+msgid "Оформить заказ ✅"
+msgstr "Checkout ✅"
+
+#: keyboards/default/contacts_keyboard.py:11
+#, fuzzy
+msgid "Назад ⬅️"
+msgstr "Back"
+
+#: keyboards/default/contacts_keyboard.py:20
+msgid "Отправить контакт 📞"
+msgstr "Send contact 📞"
+
+#: keyboards/default/contacts_keyboard.py:29
+msgid "Send location 📍"
+msgstr ""
+
+#: keyboards/default/menu_keyboard.py:7
 msgid "Категории 🗂"
 msgstr "Categories 🗂"
 
@@ -92,7 +158,7 @@ msgstr "Categories 🗂"
 msgid "Корзина 🛒"
 msgstr "Cart 🛒"
 
-#: keyboards/default/menu_keyboard.py:8
+#: keyboards/default/menu_keyboard.py:8 keyboards/default/menu_keyboard.py:15
 msgid "Заказы 📦"
 msgstr "Orders 📦"
 
@@ -100,27 +166,52 @@ msgstr "Orders 📦"
 msgid "Помощь ❓"
 msgstr "Help ❓"
 
-#: keyboards/default/menu_keyboard.py:9 keyboards/default/menu_keyboard.py:16
+#: keyboards/default/menu_keyboard.py:9
 msgid "Изменить язык 🌐"
 msgstr "Change language 🌐"
 
-#: keyboards/default/menu_keyboard.py:15
-msgid "Товары 🗂"
-msgstr "Items 🗂"
-
-#: keyboards/default/menu_keyboard.py:16
-msgid "Заказы 🗂"
-msgstr "Orders 🗂"
-
-#: keyboards/inline/cart_keyboard.py:9
+#: keyboards/inline/cart_keyboard.py:11
 msgid "Очистить 🛒"
 msgstr "Clear 🛒"
 
-#: keyboards/inline/cart_keyboard.py:10
-msgid "Посмотреть товары"
+#: keyboards/inline/cart_keyboard.py:12
+#, fuzzy
+msgid "Посмотреть товары 🔎"
 msgstr "Show items"
+
+#: keyboards/inline/cart_keyboard.py:13
+msgid "К оформлению заказа ✅"
+msgstr "To checkout ✅"
+
+#: keyboards/inline/cart_keyboard.py:35
+msgid ""
+"<b>Товар:</b> {item_name}\n"
+"<b>Цена за кг:</b> {price:,} сум.\n"
+"<b>Объем:</b> {quantity:,} кг.\n"
+"<b>Стоимость товара: </b> {summary:,} сум."
+msgstr ""
+"<b>Item:</b> {item_name}\n"
+"<b>Price per kg:</b> {price:,} sum.\n"
+"<b>Volume:</b> {quantity:,} kg.\n"
+"<b>Summary: </b> {summary:,} sum."
+
 
 #: keyboards/inline/menu_keyboard.py:65
 msgid "Назад"
 msgstr "Back"
+
+#: utils/helpers/decorators.py:13 utils/helpers/decorators.py:24
+msgid "⛔️ Доступ в админ панель только у администраторов."
+msgstr ""
+
+#: utils/helpers/decorators.py:35 utils/helpers/decorators.py:46
+#: utils/helpers/decorators.py:57
+msgid "Выполнить действие невозможно. Введите /start, чтобы войти."
+msgstr ""
+
+#~ msgid "Товары 🗂"
+#~ msgstr "Items 🗂"
+
+#~ msgid "Заказы 🗂"
+#~ msgstr "Orders 🗂"
 

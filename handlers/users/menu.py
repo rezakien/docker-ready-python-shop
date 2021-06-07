@@ -14,7 +14,7 @@ from keyboards.inline.menu_keyboard import get_categories_keyboard, get_subcateg
     item_keyboard
 
 from loader import dp, _, get_all_language_variants
-from utils.db.models import User, Item
+from utils.db.models import User, Item, Category
 
 from utils.helpers.decorators import user_sign_in_message, user_sign_in_callback
 
@@ -63,8 +63,7 @@ async def categories_handler(call: CallbackQuery, callback_data: dict):
     levels = {
         "0": list_categories,
         "1": list_subcategories,
-        "2": list_items,
-        "3": show_item,
+        "2": list_items
     }
     if category == "0":
         current_level = "0"
@@ -72,11 +71,9 @@ async def categories_handler(call: CallbackQuery, callback_data: dict):
         current_level = "1"
     if show_items == "True":
         current_level = "2"
-    if item_id != 0:
-        current_level = "3"
     current_level_function = levels[current_level]
 
-    await current_level_function(call, category=category, item_id=item_id)
+    await current_level_function(call, category=category)
 
 
 async def list_categories(callback: CallbackQuery, **kwargs):
@@ -95,20 +92,17 @@ async def list_subcategories(callback: CallbackQuery, category, **kwargs):
 
 
 async def list_items(callback: CallbackQuery, category, **kwargs):
-    markup = await get_items_keyboard(category)
-    await callback.message.edit_text(text=_("Выберите товар 👇🏻"))
-    await callback.message.edit_reply_markup(reply_markup=markup)
+    items = await Category.all_items_of_category(category)
+    for item in items:
+        item_id = item.id
+        markup = item_keyboard(item_id)
+        item = await Item.get_item(item_id)
+        text = await item.get_item_text()
+        text = f"{text}"
 
-
-async def show_item(callback: CallbackQuery, item_id, **kwargs):
-    markup = item_keyboard(item_id)
-    item = await Item.get_item(item_id)
-    text = await item.get_item_text()
-    text = f"{text}"
-
-    photo = await item.get_photo()
-    await callback.message.edit_reply_markup()
-    await callback.message.edit_text(text=_("Вы выбрали товар 👇🏻"))
-    await callback.message.answer_photo(photo=photo, caption=text, reply_markup=markup)
+        photo = await item.get_photo()
+        await callback.message.edit_reply_markup()
+        await callback.message.edit_text(text=_("Выберите товар 👇🏻"))
+        await callback.message.answer_photo(photo=photo, caption=text, reply_markup=markup)
 
 

@@ -1,7 +1,8 @@
 from datetime import datetime
 import logging
 
-from sqlalchemy import (Column, Integer, String, Sequence, BigInteger, DateTime, Boolean, ForeignKey, Text, JSON, and_)
+from sqlalchemy import (Column, Integer, String, Sequence, BigInteger, DateTime, Boolean, ForeignKey, Text, JSON, and_,
+                        FLOAT)
 from sqlalchemy import sql
 from utils.db.database import db
 from aiogram import types
@@ -197,7 +198,6 @@ class Item(db.Model):
         ]
 
         price_max = await Price.query.where(and_(*cond_max)).gino.first()
-        logging.info(price_max)
         if price_max is not None:
             return int(price_max.price)
         else:
@@ -280,7 +280,6 @@ class Cart(db.Model):
         for cart_item in cart_items:
             item = await Item.get_item(cart_item.item_id)
             price = await item.get_price(cart_item.quantity)
-            logging.info(price)
             summary += int(price) * cart_item.quantity
         return summary
 
@@ -316,11 +315,12 @@ class Order(db.Model):
     id = Column(Integer, Sequence('order_id_seq'), primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
     sum = Column(Integer)
-    purchase_time = Column(DateTime)
-    shipping_address = Column(JSON)
+    location = Column(JSON)
     phone_number = Column(String(50))
     successful = Column(Boolean, default=False)
     datetime = Column(DateTime, default=datetime.now)
+    longitude = Column(FLOAT)
+    latitude = Column(FLOAT)
 
     @staticmethod
     async def get_orders():
@@ -336,7 +336,9 @@ class OrderItem(db.Model):
     id = Column(Integer, Sequence('order_id_seq'), primary_key=True)
     item_id = Column(Integer, ForeignKey('item.id'))
     order_id = Column(Integer, ForeignKey('order.id'))
+    price = Column(Integer)
     quantity = Column(Integer, default=0)
+    summary = Column(Integer)
     datetime = Column(DateTime, default=datetime.now)
 
 
