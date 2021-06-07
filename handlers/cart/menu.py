@@ -7,7 +7,7 @@ from keyboards.default import get_contacts_keyboard, get_menu_keyboard
 from keyboards.inline.callbacks import cart_callback
 from keyboards.inline.cart_keyboard import get_cart_keyboard, get_items_with_keyboard
 from loader import dp, _, get_all_language_variants
-from utils.db import Cart
+from utils.db.models import Cart
 from utils.helpers.decorators import user_sign_in_message, user_sign_in_callback
 
 

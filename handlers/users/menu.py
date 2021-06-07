@@ -14,9 +14,7 @@ from keyboards.inline.menu_keyboard import get_categories_keyboard, get_subcateg
     item_keyboard
 
 from loader import dp, _, get_all_language_variants
-from utils.db import Item
-from utils.db.models.user import User
-import logging
+from utils.db.models import User, Item
 
 from utils.helpers.decorators import user_sign_in_message, user_sign_in_callback
 

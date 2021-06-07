@@ -2,7 +2,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from keyboards.inline.callbacks import make_callback_data, item_callback
 from loader import _
-from utils.db import Category
+from utils.db.models import Category
 
 
 async def get_categories_keyboard():

@@ -1,7 +1,8 @@
 import random
 import string
 
-from utils.db.models import Category, Item, Price
+from utils.db.models import Item, Category, Price
+
 
 
 async def add_to_database():

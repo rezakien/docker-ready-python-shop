@@ -3,7 +3,7 @@ from typing import Tuple, Any, Optional
 from aiogram import types
 from aiogram.contrib.middlewares.i18n import I18nMiddleware
 from config import I18N_DOMAIN, LOCALES_DIR
-from utils.db.models.user import User
+from utils.db.models import User
 
 
 async def get_lang(user_id):

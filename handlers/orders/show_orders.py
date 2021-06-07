@@ -2,7 +2,7 @@ from aiogram.dispatcher.filters import Text
 from aiogram.types import Message, CallbackQuery
 
 from loader import dp, _, get_all_language_variants
-from utils.db import Order
+from utils.db.models import Order
 from utils.helpers.decorators import user_sign_in_message
 
 

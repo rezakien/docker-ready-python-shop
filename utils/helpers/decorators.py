@@ -1,6 +1,6 @@
 from aiogram.types import Message, CallbackQuery
 from loader import _
-from utils.db import User
+from utils.db.models import User
 
 
 def admin_sign_in_message(func):

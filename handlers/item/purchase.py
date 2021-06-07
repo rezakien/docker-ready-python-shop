@@ -4,7 +4,7 @@ from keyboards.inline.callbacks import item_callback
 from keyboards.inline.cart_keyboard import get_cart_item_text
 from keyboards.inline.menu_keyboard import item_keyboard
 from loader import dp, _
-from utils.db import Item, Cart, User
+from utils.db.models import Cart, Item, User
 from utils.helpers.decorators import user_sign_in_callback
 
 
@@ -25,20 +25,33 @@ async def item_cart_resolve(call: CallbackQuery, callback_data: dict):
             cart_item = await Cart.get_cart_item(item.id)
             item_price = await item.get_price(cart_item.quantity)
             text = _("Добавлено {quantity} кг. {item_name} по {item_price:,} сум.".format(quantity=quantity, item_name=item.name, item_price=item_price))
-            if place == 'cart':
-                cart_item = await Cart.get_cart_item(item_id)
-                if cart_item:
-                    text_in_cart = await get_cart_item_text(cart_item, item)
-                    reply_markup = item_keyboard(item.id, 'cart')
-                    await call.message.edit_text(text=text_in_cart, reply_markup=reply_markup)
         if quantity == 0:
             text = _("Товар удален из корзины".format(item.name))
-            if place == 'cart':
-                await call.message.edit_text(text=_("Товар {item_name} удален из корзины".format(item_name=item.name)))
-                await call.message.edit_reply_markup()
+        await reply_item(quantity, place, item, call)
     else:
         if res["message"] == "ERROR_CAPACITY":
             text = _("Минимальный объем товара составляет 100 кг.")
         elif res["message"] == "UNKNOWN_ERROR":
             text = _("Произошла неизвестная ошибка при удалении")
     await call.answer(text=text, cache_time=1)
+
+
+async def reply_item(quantity, place, item, call):
+    if place == 'category':
+        text = await item.get_item_text()
+        reply_markup = item_keyboard(item.id)
+        await call.message.edit_caption(caption=text, reply_markup=reply_markup)
+    if place == 'cart':
+        if quantity > 0:
+            cart_item = await Cart.get_cart_item(item.id)
+            if cart_item:
+                text_in_cart = await get_cart_item_text(cart_item, item)
+                reply_markup = item_keyboard(item.id, 'cart')
+                await call.message.edit_text(text=text_in_cart, reply_markup=reply_markup)
+        if quantity == 0:
+            text = _("Товар удален из корзины".format(item.name))
+            if place == 'cart':
+                await call.message.edit_text(text=_("Товар {item_name} удален из корзины".format(item_name=item.name)))
+                await call.message.edit_reply_markup()
+
+

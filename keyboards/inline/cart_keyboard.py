@@ -3,7 +3,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQu
 from keyboards.inline.callbacks import cart_callback
 from keyboards.inline.menu_keyboard import item_keyboard
 from loader import _
-from utils.db import Cart, Item
+from utils.db.models import Cart, Item
 
 
 def get_cart_keyboard():
