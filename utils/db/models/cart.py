@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 
 from aiogram import types
@@ -48,17 +49,10 @@ class Cart(db.Model):
         cart_items = await Cart.query.where(Cart.user_id == user.id).gino.all()
         summary = 0
         for cart_item in cart_items:
-            item_prices = await Price.query.where(Price.item_id == cart_item.item_id).order_by(Price.min_quantity.asc()).gino.all()
-            price = None
-            for item_price in item_prices:
-                if cart_item.quantity >= item_price.min_quantity and cart_item.quantity < item_price.max_quantity:
-                    price = item_price.price
-                    break
-                elif cart_item.quantity < item_price.min_quantity:
-                    item = await Item.get_item(cart_item.item_id)
-                    price = item.price
-                    break
-            summary += price * cart_item.quantity
+            item = await Item.get_item(cart_item.item_id)
+            price = await item.get_price(cart_item.quantity)
+            logging.info(price)
+            summary += int(price) * cart_item.quantity
         return summary
 
     @staticmethod

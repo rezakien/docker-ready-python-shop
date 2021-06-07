@@ -103,7 +103,8 @@ async def list_items(callback: CallbackQuery, category, **kwargs):
 async def show_item(callback: CallbackQuery, item_id, **kwargs):
     markup = item_keyboard(item_id)
     item = await Item.get_item(item_id)
-    text = f"{item}"
+    text = await item.get_item_text()
+    text = f"{text}"
 
     photo = await item.get_photo()
     await callback.message.edit_reply_markup()

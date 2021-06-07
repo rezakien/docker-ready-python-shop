@@ -22,7 +22,9 @@ async def item_cart_resolve(call: CallbackQuery, callback_data: dict):
     res = await Cart.create_update_item(item_id=item.id, user_id=user.id, quantity=quantity)
     if res:
         if quantity > 0:
-            text = _("Добавлено {quantity} шт. {item_name}".format(quantity=quantity, item_name=item.name))
+            cart_item = await Cart.get_cart_item(item.id)
+            item_price = await item.get_price(cart_item.quantity)
+            text = _("Добавлено {quantity} кг. {item_name} по {item_price:,} сум.".format(quantity=quantity, item_name=item.name, item_price=item_price))
             if place == 'cart':
                 cart_item = await Cart.get_cart_item(item_id)
                 if cart_item:
