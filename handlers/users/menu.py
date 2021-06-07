@@ -89,6 +89,7 @@ async def list_categories(callback: CallbackQuery, **kwargs):
 async def list_subcategories(callback: CallbackQuery, category, **kwargs):
     markup = await get_subcategories_keyboard(category)
     if len(markup.inline_keyboard) > 0:
+        await callback.message.edit_text(text=_("Выберите подкатегорию 👇🏻"))
         await callback.message.edit_reply_markup(markup)
     else:
         await callback.message.edit_reply_markup()
@@ -97,6 +98,7 @@ async def list_subcategories(callback: CallbackQuery, category, **kwargs):
 
 async def list_items(callback: CallbackQuery, category, **kwargs):
     markup = await get_items_keyboard(category)
+    await callback.message.edit_text(text=_("Выберите товар 👇🏻"))
     await callback.message.edit_reply_markup(reply_markup=markup)
 
 
@@ -108,6 +110,7 @@ async def show_item(callback: CallbackQuery, item_id, **kwargs):
 
     photo = await item.get_photo()
     await callback.message.edit_reply_markup()
+    await callback.message.edit_text(text=_("Вы выбрали товар 👇🏻"))
     await callback.message.answer_photo(photo=photo, caption=text, reply_markup=markup)
 
 

@@ -27,14 +27,32 @@ class Cart(db.Model):
         cart_item = await Cart.query.where(and_(*conditions)).gino.first()
         if kwargs["quantity"] > 0:
             if cart_item is None:
-                return await Cart(**kwargs).create()
+                if kwargs["quantity"] >= 100:
+                    return {
+                        "message": await Cart(**kwargs).create(),
+                        "success": True
+                    }
+                else:
+                    return {
+                        "message": "ERROR_CAPACITY",
+                        "success": False
+                    }
             else:
-                return await cart_item.update(quantity=cart_item.quantity + kwargs["quantity"]).apply()
+                return {
+                    "message": await cart_item.update(quantity=cart_item.quantity + kwargs["quantity"]).apply(),
+                    "success": True
+                }
         else:
             if cart_item is not None:
-                return await cart_item.delete()
+                return {
+                    "message": await cart_item.delete(),
+                    "success": True
+                }
             else:
-                return False
+                return {
+                    "message": "UNKNOWN_ERROR",
+                    "success": False
+                }
 
     @staticmethod
     async def get_cart():

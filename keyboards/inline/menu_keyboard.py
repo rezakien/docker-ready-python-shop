@@ -53,7 +53,7 @@ async def get_items_keyboard(category_id):
         for item in items:
             callback_data = make_callback_data(category=category_id,
                                                item_id=item.id)
-            button_text = "{name} - {price:,} сум.".format(name=item.name, price=item.price)
+            button_text = "{name}".format(name=item.name)
             markup.insert(
                 InlineKeyboardButton(text=button_text, callback_data=callback_data)
             )

@@ -20,7 +20,7 @@ async def item_cart_resolve(call: CallbackQuery, callback_data: dict):
     item = await Item.get_item(item_id)
     text = ""
     res = await Cart.create_update_item(item_id=item.id, user_id=user.id, quantity=quantity)
-    if res:
+    if res["success"] is True:
         if quantity > 0:
             cart_item = await Cart.get_cart_item(item.id)
             item_price = await item.get_price(cart_item.quantity)
@@ -36,4 +36,9 @@ async def item_cart_resolve(call: CallbackQuery, callback_data: dict):
             if place == 'cart':
                 await call.message.edit_text(text=_("Товар {item_name} удален из корзины".format(item_name=item.name)))
                 await call.message.edit_reply_markup()
+    else:
+        if res["message"] == "ERROR_CAPACITY":
+            text = _("Минимальный объем товара составляет 100 кг.")
+        elif res["message"] == "UNKNOWN_ERROR":
+            text = _("Произошла неизвестная ошибка при удалении")
     await call.answer(text=text, cache_time=1)

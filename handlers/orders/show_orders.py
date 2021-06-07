@@ -3,7 +3,7 @@ from aiogram.types import Message, CallbackQuery
 
 from loader import dp, _, get_all_language_variants
 from utils.db import Order
-from utils.helpers.decorators import user_sign_in_message, user_sign_in_callback
+from utils.helpers.decorators import user_sign_in_message
 
 
 @dp.message_handler(Text(equals=get_all_language_variants("Заказы 📦")))

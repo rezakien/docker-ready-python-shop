@@ -10,7 +10,7 @@ def get_cart_keyboard():
     markup = InlineKeyboardMarkup(resize_keyboard=True, row_width=1)
     markup.row(InlineKeyboardButton(text=_("Очистить 🛒"), callback_data=cart_callback.new(action="clear")))
     markup.row(InlineKeyboardButton(text=_("Посмотреть товары 🔎"), callback_data=cart_callback.new(action="show")))
-    markup.row(InlineKeyboardButton(text=_("Оформить заказ ✅"), callback_data=cart_callback.new(action="order")))
+    markup.row(InlineKeyboardButton(text=_("К оформлению заказа ✅"), callback_data=cart_callback.new(action="order")))
     return markup
 
 
