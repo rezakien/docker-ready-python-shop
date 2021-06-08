@@ -315,12 +315,11 @@ class Order(db.Model):
     id = Column(Integer, Sequence('order_id_seq'), primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
     sum = Column(Integer)
-    location = Column(JSON)
     phone_number = Column(String(50))
     successful = Column(Boolean, default=False)
-    datetime = Column(DateTime, default=datetime.now)
     longitude = Column(FLOAT)
     latitude = Column(FLOAT)
+    datetime = Column(DateTime, default=datetime.now)
 
     @staticmethod
     async def get_orders():

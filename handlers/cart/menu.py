@@ -1,5 +1,6 @@
 import logging
 
+from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
 from aiogram.types import Message, CallbackQuery, ContentType
@@ -117,7 +118,13 @@ async def save_order(state: FSMContext):
         if location is not None and contact is not None:
             summary = await Cart.get_cart_sum()
             if summary > 0:
-                order = await Order(user_id=contact["user_id"], phone_number=contact["phone_number"], longitude=location["longitude"], latitude=location["latitude"], sum=summary).create()
+                current = types.User.get_current()
+                user = await User.get_user(current.id)
+                order = await Order(user_id=user.id,
+                                    phone_number=contact["phone_number"],
+                                    longitude=location["longitude"],
+                                    latitude=location["latitude"],
+                                    sum=summary).create()
                 cart_items = await Cart.get_cart_items()
                 for cart_item in cart_items:
                     item = await Item.get_item(cart_item.item_id)
@@ -125,6 +132,7 @@ async def save_order(state: FSMContext):
                     quantity = cart_item.quantity
                     summary = price * quantity
                     order_item = await OrderItem(order_id=order.id, item_id=item.id, price=price, quantity=quantity, summary=summary).create()
+                await Cart.clear_cart()
                 return True
             else:
                 return False
