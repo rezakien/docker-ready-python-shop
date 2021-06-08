@@ -69,13 +69,13 @@ def get_back_button(category_id):
 
 def item_keyboard(item_id, place='category'):
     inline_keyboard = [InlineKeyboardButton(
-        text="+25",
+        text=_("+25кг"),
         callback_data=item_callback.new(item_id=item_id, quantity=25, place=place)
     ), InlineKeyboardButton(
-        text="+100",
+        text=_("+100кг"),
         callback_data=item_callback.new(item_id=item_id, quantity=100, place=place)
     ), InlineKeyboardButton(
-        text="+500",
+        text=_("+500кг"),
         callback_data=item_callback.new(item_id=item_id, quantity=500, place=place)
     ), InlineKeyboardButton(
         text="🗑",

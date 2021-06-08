@@ -103,7 +103,7 @@ async def menu_cart_contact_handler(message: ContentType.LOCATION, state: FSMCon
         data["contact"] = message.contact
     res = await save_order(state)
     if res:
-        text = _("Заказ подтвержден! Ждите звонка, либо сообщения от нашего продавца.")
+        text = _("Заказ подтвержден! Ждите звонка, либо сообщения от нашего оператора.")
     else:
         text = _("Что-то пошло не так, повторите попытку.")
     reply_markup = get_menu_keyboard()
@@ -131,7 +131,14 @@ async def save_order(state: FSMContext):
                     price = await item.get_price(cart_item.quantity)
                     quantity = cart_item.quantity
                     summary = price * quantity
-                    order_item = await OrderItem(order_id=order.id, item_id=item.id, price=price, quantity=quantity, summary=summary).create()
+                    order_item = await OrderItem(
+                        order_id=order.id,
+                        item_id=item.id,
+                        price=price,
+                        quantity=quantity,
+                        user_id=user.id,
+                        summary=summary
+                    ).create()
                 await Cart.clear_cart()
                 return True
             else:

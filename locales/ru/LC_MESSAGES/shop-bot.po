@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-06-08 04:48+0500\n"
+"POT-Creation-Date: 2021-06-08 18:50+0500\n"
 "PO-Revision-Date: 2021-05-25 14:27+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -19,53 +19,53 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: handlers/cart/menu.py:20
+#: handlers/cart/menu.py:21
 msgid "товара"
 msgstr ""
 
-#: handlers/cart/menu.py:22
+#: handlers/cart/menu.py:23
 msgid "товар"
 msgstr ""
 
-#: handlers/cart/menu.py:24
+#: handlers/cart/menu.py:25
 msgid "товаров"
 msgstr ""
 
-#: handlers/cart/menu.py:35
+#: handlers/cart/menu.py:36
 msgid "У вас пока нет товаров в корзине."
 msgstr ""
 
-#: handlers/cart/menu.py:37
+#: handlers/cart/menu.py:38
 msgid ""
 "В вашей корзине <b>{items_count} {items_word}</b>.\n"
 "<b>На сумму</b>: {sum:,} сум."
 msgstr ""
 
-#: handlers/cart/menu.py:54
+#: handlers/cart/menu.py:55
 msgid "Корзина очищена"
 msgstr ""
 
-#: handlers/cart/menu.py:59
+#: handlers/cart/menu.py:60
 msgid "Просмотр товаров в корзине"
 msgstr ""
 
-#: handlers/cart/menu.py:63
+#: handlers/cart/menu.py:64
 msgid "Вы уверены, что хотите оформить заказ?"
 msgstr ""
 
-#: handlers/cart/menu.py:79
+#: handlers/cart/menu.py:80
 msgid "Пожалуйста, отправьте свою локацию"
 msgstr ""
 
-#: handlers/cart/menu.py:92
+#: handlers/cart/menu.py:93
 msgid "Пожалуйста, отправьте свой контакт"
 msgstr ""
 
-#: handlers/cart/menu.py:105
-msgid "Заказ подтвержден! Ждите звонка, либо сообщения от нашего продавца."
+#: handlers/cart/menu.py:106
+msgid "Заказ подтвержден! Ждите звонка, либо сообщения от нашего оператора."
 msgstr ""
 
-#: handlers/cart/menu.py:107
+#: handlers/cart/menu.py:108
 msgid "Что-то пошло не так, повторите попытку."
 msgstr ""
 
@@ -89,8 +89,37 @@ msgstr ""
 msgid "Товар {item_name} удален из корзины"
 msgstr ""
 
-#: handlers/orders/show_orders.py:16
+#: handlers/orders/show_orders.py:18
 msgid "У вас пока нет заказов."
+msgstr ""
+
+#: handlers/orders/show_orders.py:20
+msgid "Ваши заказы 📦"
+msgstr ""
+
+#: handlers/orders/show_orders.py:35
+msgid "Просмотр товаров заказа №{}"
+msgstr ""
+
+#: handlers/orders/show_orders.py:48
+msgid "Завершен ✅"
+msgstr ""
+
+#: handlers/orders/show_orders.py:48
+msgid "Обрабатывается 🕗"
+msgstr ""
+
+#: handlers/orders/show_orders.py:50
+msgid "Отменен ❌"
+msgstr ""
+
+#: handlers/orders/show_orders.py:56
+msgid ""
+"Заказ №{order_id}\n"
+"Сумма: {order_sum:,} сум.\n"
+"Время оформления: {order_time}\n"
+"\n"
+"Статус: {status}"
 msgstr ""
 
 #: handlers/users/menu.py:24
@@ -165,7 +194,7 @@ msgstr ""
 msgid "Очистить 🛒"
 msgstr ""
 
-#: keyboards/inline/cart_keyboard.py:12
+#: keyboards/inline/cart_keyboard.py:12 keyboards/inline/order_keyboard.py:11
 msgid "Посмотреть товары 🔎"
 msgstr ""
 
@@ -173,7 +202,7 @@ msgstr ""
 msgid "К оформлению заказа ✅"
 msgstr ""
 
-#: keyboards/inline/cart_keyboard.py:35
+#: keyboards/inline/cart_keyboard.py:39
 msgid ""
 "<b>Товар:</b> {item_name}\n"
 "<b>Цена за кг:</b> {price:,} сум.\n"
@@ -183,6 +212,22 @@ msgstr ""
 
 #: keyboards/inline/menu_keyboard.py:65
 msgid "Назад"
+msgstr ""
+
+#: keyboards/inline/menu_keyboard.py:72
+msgid "+25кг"
+msgstr ""
+
+#: keyboards/inline/menu_keyboard.py:75
+msgid "+100кг"
+msgstr ""
+
+#: keyboards/inline/menu_keyboard.py:78
+msgid "+500кг"
+msgstr ""
+
+#: keyboards/inline/order_keyboard.py:18
+msgid "Отменить заказ ❌"
 msgstr ""
 
 #: utils/helpers/decorators.py:13 utils/helpers/decorators.py:24
@@ -217,5 +262,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Посмотреть товары"
+#~ msgstr ""
+
+#~ msgid "Заказ подтвержден! Ждите звонка, либо сообщения от нашего продавца."
 #~ msgstr ""
 

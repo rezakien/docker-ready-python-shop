@@ -317,6 +317,7 @@ class Order(db.Model):
     sum = Column(Integer)
     phone_number = Column(String(50))
     successful = Column(Boolean, default=False)
+    canceled = Column(Boolean, default=False)
     longitude = Column(FLOAT)
     latitude = Column(FLOAT)
     datetime = Column(DateTime, default=datetime.now)
@@ -327,6 +328,33 @@ class Order(db.Model):
         user = await User.get_user(current.id)
         return await Order.query.where(Order.user_id == user.id).order_by(Order.datetime.desc()).gino.all()
 
+    @staticmethod
+    async def get_order_items(order_id):
+        current_user = types.User.get_current()
+        user = await User.get_user(current_user.id)
+
+        conditions = [
+            OrderItem.order_id == order_id,
+            OrderItem.user_id == user.id
+        ]
+        order_items = await OrderItem.query.where(and_(*conditions)).gino.all()
+        return order_items
+
+    @staticmethod
+    async def cancel_order(order_id):
+        current_user = types.User.get_current()
+        user = await User.get_user(current_user.id)
+
+        conditions = [
+            Order.id == order_id,
+            Order.user_id == user.id,
+            Order.canceled is not False
+        ]
+        order = await Order.query.where(and_(*conditions)).gino.first()
+        if order is not None:
+            await order.update(canceled=True).apply()
+        return order
+
 
 class OrderItem(db.Model):
     __tablename__ = 'order_item'
@@ -335,6 +363,7 @@ class OrderItem(db.Model):
     id = Column(Integer, Sequence('order_id_seq'), primary_key=True)
     item_id = Column(Integer, ForeignKey('item.id'))
     order_id = Column(Integer, ForeignKey('order.id'))
+    user_id = Column(Integer, ForeignKey('user.id'))
     price = Column(Integer)
     quantity = Column(Integer, default=0)
     summary = Column(Integer)

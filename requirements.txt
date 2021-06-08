@@ -3,3 +3,4 @@ asyncpg
 aiogram
 sqlalchemy
 gino
+pytz
