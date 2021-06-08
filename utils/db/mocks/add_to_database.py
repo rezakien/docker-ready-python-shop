@@ -9,8 +9,8 @@ async def add_to_database():
     rabbit = await Category.create(name='Корм для кроликов 🐇')
     pet = await Category.create(name='Корм для птиц 🐓')
 
-    rabbit_universal = await Category.create(name='Универсал', parent_id=rabbit.id)
-    rabbit_premium = await Category.create(name='Премиум', parent_id=rabbit.id)
+    rabbit_universal = await Category.create(name='Universal', parent_id=rabbit.id)
+    rabbit_premium = await Category.create(name='Premium', parent_id=rabbit.id)
 
     item = await Item.create(name='Корм для кроликов Universal 🐇', category_id=rabbit_universal.id, photo='rabbit-universal.jpg', price=4600)
     await Price.create(item_id=item.id, min_quantity=100, max_quantity=475, price=4500)
