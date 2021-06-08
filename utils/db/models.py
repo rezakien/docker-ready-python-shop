@@ -318,8 +318,9 @@ class Order(db.Model):
     phone_number = Column(String(50))
     successful = Column(Boolean, default=False)
     canceled = Column(Boolean, default=False)
-    longitude = Column(FLOAT)
     latitude = Column(FLOAT)
+    longitude = Column(FLOAT)
+    address = Column(Text)
     datetime = Column(DateTime, default=datetime.now)
 
     @staticmethod

@@ -7,6 +7,10 @@ from aiogram.types import ParseMode
 import config
 from language_middleware import setup_middleware
 from constants.lang import LANGUAGES
+from geopy.geocoders import Nominatim
+
+
+geo_loc = Nominatim(user_agent="my_user_agent")
 
 logging.basicConfig(format=u'%(filename)s [LINE:%(lineno)d] #%(levelname)-8s [%(asctime)s]  %(message)s',
                     level=logging.INFO,

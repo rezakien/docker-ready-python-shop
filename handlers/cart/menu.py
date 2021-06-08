@@ -10,10 +10,11 @@ from keyboards.default import get_contacts_keyboard, get_menu_keyboard
 from keyboards.default.contacts_keyboard import get_location_keyboard, get_contact_keyboard
 from keyboards.inline.callbacks import cart_callback
 from keyboards.inline.cart_keyboard import get_cart_keyboard, get_items_with_keyboard
-from loader import dp, _, get_all_language_variants
+from loader import dp, _, get_all_language_variants, geo_loc
 from states.order import OrderState
 from utils.db.models import Cart, Order, OrderItem, User, Item
 from utils.helpers.decorators import user_sign_in_message, user_sign_in_callback, user_sign_in_message_state
+from decimal import Decimal
 
 
 def get_word_items(count):
@@ -120,10 +121,14 @@ async def save_order(state: FSMContext):
             if summary > 0:
                 current = types.User.get_current()
                 user = await User.get_user(current.id)
+                latitude = location.latitude
+                longitude = location.longitude
+                address = geo_loc.reverse("{}, {}".format(latitude, longitude), language='uz').address
                 order = await Order(user_id=user.id,
                                     phone_number=contact["phone_number"],
-                                    longitude=location["longitude"],
-                                    latitude=location["latitude"],
+                                    latitude=latitude,
+                                    longitude=longitude,
+                                    address=address if address is not None and address != '' else None,
                                     sum=summary).create()
                 cart_items = await Cart.get_cart_items()
                 for cart_item in cart_items:
