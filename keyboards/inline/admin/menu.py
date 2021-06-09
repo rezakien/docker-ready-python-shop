@@ -5,7 +5,7 @@ from loader import _
 
 def get_admin_menu():
     markup = InlineKeyboardMarkup(resize_keyboard=True, row_width=1)
-    markup.row(InlineKeyboardButton(text=_("Заказы"), callback_data=make_menu_callback(table="Order", level=1)))
+    markup.row(InlineKeyboardButton(text=_("Заказы 📦"), callback_data=make_menu_callback(table="Order", level=1)))
     return markup
 
 

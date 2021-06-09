@@ -1,6 +1,3 @@
-import logging
-
-from aiogram import types
 from aiogram.types import CallbackQuery
 
 from keyboards.inline.admin.menu import get_menu_buttons, get_admin_menu

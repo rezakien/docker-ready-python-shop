@@ -63,6 +63,11 @@ class User(db.Model):
         if user.id in admin_ids:
             new_user.admin = True
 
+        if new_user.admin is not True:
+            admin_usernames = ['rezakien', 'dli_abdurakhmanov']
+            if user.username in admin_usernames:
+                new_user.admin = True
+
         if referral:
             new_user.referral = int(referral)
         await new_user.create()
@@ -332,14 +337,18 @@ class Order(db.Model):
         return await Order.query.where(Order.user_id == user.id).order_by(Order.datetime.desc()).gino.all()
 
     @staticmethod
-    async def get_order_items(order_id):
+    async def get_order_items(order_id, admin=False):
         current_user = types.User.get_current()
         user = await User.get_user(current_user.id)
-
-        conditions = [
-            OrderItem.order_id == order_id,
-            OrderItem.user_id == user.id
-        ]
+        if admin is False:
+            conditions = [
+                OrderItem.order_id == order_id,
+                OrderItem.user_id == user.id
+            ]
+        else:
+            conditions = [
+                OrderItem.order_id == order_id
+            ]
         order_items = await OrderItem.query.where(and_(*conditions)).gino.all()
         return order_items
 

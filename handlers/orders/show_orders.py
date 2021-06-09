@@ -24,25 +24,29 @@ async def menu_orders_handler(message: Message):
 
 @dp.callback_query_handler(order_callback.filter())
 @user_sign_in_callback
-async def order_callback_handler(call: CallbackQuery, callback_data: dict):
+async def order_callback_handler(callback: CallbackQuery, callback_data: dict):
     order_id = int(callback_data.get("order_id"))
     action = callback_data.get("action")
+    admin = callback_data.get("admin")
     if action == "show_items":
-        order_items = await Order.get_order_items(order_id)
+        order_items = await Order.get_order_items(order_id, admin)
         if len(order_items) > 0:
             for order_item in order_items:
                 item = await Item.get_item(order_item.item_id)
                 photo = await item.get_photo()
                 text = get_text(item.name, order_item.price, order_item.quantity)
-                await call.message.answer_photo(photo=photo, caption=text)
+                await callback.message.answer_photo(photo=photo, caption=text)
     elif action == "cancel_order":
         order = await Order.cancel_order(order_id)
         res = get_order_text_and_keyboard(order)
-        await call.message.edit_text(text=res.get("order_text"), reply_markup=res.get("reply_markup"))
+        await callback.message.edit_text(text=res.get("order_text"), reply_markup=res.get("reply_markup"))
+    elif action == "show_address":
+        order = await Order.get(order_id)
+        await callback.message.answer_location(latitude=order.latitude, longitude=order.longitude)
     elif action == "confirm_order":
         order = await Order.confirm_order(order_id)
         res = get_order_text_and_keyboard(order)
-        await call.message.edit_text(text=res.get("order_text"), reply_markup=res.get("reply_markup"))
+        await callback.message.edit_text(text=res.get("order_text"), reply_markup=res.get("reply_markup"))
 
 
 

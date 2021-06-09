@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-06-08 18:50+0500\n"
+"POT-Creation-Date: 2021-06-10 01:48+0500\n"
 "PO-Revision-Date: 2021-05-25 14:27+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -18,24 +18,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: handlers/cart/menu.py:21
+#: handlers/admin/menu.py:31
+msgid "Выберите, что хотите посмотреть/редактировать."
+msgstr ""
+
+#: handlers/admin/menu.py:38
+msgid "Выберите действие."
+msgstr "Choose action."
+
+#: handlers/admin/menu.py:55
+msgid "Назад в меню заказов."
+msgstr "Back to orders."
+
+#: handlers/cart/menu.py:22
 msgid "товара"
 msgstr "items"
 
-#: handlers/cart/menu.py:23
+#: handlers/cart/menu.py:24
 msgid "товар"
 msgstr "item"
 
-#: handlers/cart/menu.py:25
+#: handlers/cart/menu.py:26
 msgid "товаров"
 msgstr "items"
 
-#: handlers/cart/menu.py:36
+#: handlers/cart/menu.py:37
 #, fuzzy
 msgid "У вас пока нет товаров в корзине."
 msgstr "You have't got any items on cart."
 
-#: handlers/cart/menu.py:38
+#: handlers/cart/menu.py:39
 #, fuzzy
 msgid ""
 "В вашей корзине <b>{items_count} {items_word}</b>.\n"
@@ -44,33 +56,36 @@ msgstr ""
 "You have <b>{items_count} {items_word}</b>.\n"
 "<b>На сумму</b>: {sum:,} сум."
 
-#: handlers/cart/menu.py:55
-msgid "Корзина очищена"
+#: handlers/cart/menu.py:56
+#, fuzzy
+msgid "Корзина очищена."
 msgstr "Cart was cleared"
 
-#: handlers/cart/menu.py:60
+#: handlers/cart/menu.py:61
 #, fuzzy
-msgid "Просмотр товаров в корзине"
+msgid "Просмотр товаров в корзине."
 msgstr "You have't got any items on cart."
 
-#: handlers/cart/menu.py:64
+#: handlers/cart/menu.py:65
 msgid "Вы уверены, что хотите оформить заказ?"
 msgstr "Are you sure to order?"
 
-#: handlers/cart/menu.py:80
-msgid "Пожалуйста, отправьте свою локацию"
+#: handlers/cart/menu.py:81
+#, fuzzy
+msgid "Пожалуйста, отправьте свою локацию."
 msgstr "Please, send your location"
 
-#: handlers/cart/menu.py:93
-msgid "Пожалуйста, отправьте свой контакт"
+#: handlers/cart/menu.py:92
+#, fuzzy
+msgid "Пожалуйста, отправьте свой контакт."
 msgstr "Please, send your contacts"
 
-#: handlers/cart/menu.py:106
+#: handlers/cart/menu.py:105
 #, fuzzy
 msgid "Заказ подтвержден! Ждите звонка, либо сообщения от нашего оператора."
 msgstr "Order success!Wait for a call of operator."
 
-#: handlers/cart/menu.py:108
+#: handlers/cart/menu.py:107
 msgid "Что-то пошло не так, повторите попытку."
 msgstr "Something went wrong. Retry, please."
 
@@ -88,7 +103,8 @@ msgid "Минимальный объем товара составляет 100 �
 msgstr "The minimum volume of goods is 100 kg."
 
 #: handlers/item/purchase.py:35
-msgid "Произошла неизвестная ошибка при удалении"
+#, fuzzy
+msgid "Произошла неизвестная ошибка при удалении."
 msgstr "An unknown error occurred while removing"
 
 #: handlers/item/purchase.py:54
@@ -96,40 +112,14 @@ msgstr "An unknown error occurred while removing"
 msgid "Товар {item_name} удален из корзины"
 msgstr "Item {item_name} was removed from cart"
 
-#: handlers/orders/show_orders.py:18
+#: handlers/orders/show_orders.py:17
 msgid "У вас пока нет заказов."
 msgstr "You haven't got any orders yet."
 
-#: handlers/orders/show_orders.py:20
+#: handlers/orders/show_orders.py:19
 #, fuzzy
 msgid "Ваши заказы 📦"
 msgstr "Orders 📦"
-
-#: handlers/orders/show_orders.py:35
-#, fuzzy
-msgid "Просмотр товаров заказа №{}"
-msgstr "You have't got any items on cart."
-
-#: handlers/orders/show_orders.py:48
-msgid "Завершен ✅"
-msgstr ""
-
-#: handlers/orders/show_orders.py:48
-msgid "Обрабатывается 🕗"
-msgstr ""
-
-#: handlers/orders/show_orders.py:50
-msgid "Отменен ❌"
-msgstr ""
-
-#: handlers/orders/show_orders.py:56
-msgid ""
-"Заказ №{order_id}\n"
-"Сумма: {order_sum:,} сум.\n"
-"Время оформления: {order_time}\n"
-"\n"
-"Статус: {status}"
-msgstr ""
 
 #: handlers/users/menu.py:24
 msgid "Выберите категорию 👇🏻"
@@ -191,7 +181,7 @@ msgstr "Categories 🗂"
 msgid "Корзина 🛒"
 msgstr "Cart 🛒"
 
-#: keyboards/default/menu_keyboard.py:8 keyboards/default/menu_keyboard.py:15
+#: keyboards/default/menu_keyboard.py:8 keyboards/inline/admin/menu.py:8
 msgid "Заказы 📦"
 msgstr "Orders 📦"
 
@@ -207,7 +197,8 @@ msgstr "Change language 🌐"
 msgid "Очистить 🛒"
 msgstr "Clear 🛒"
 
-#: keyboards/inline/cart_keyboard.py:12 keyboards/inline/order_keyboard.py:11
+#: keyboards/inline/admin/order.py:35 keyboards/inline/cart_keyboard.py:12
+#: keyboards/inline/order_keyboard.py:11
 #, fuzzy
 msgid "Посмотреть товары 🔎"
 msgstr "Show items"
@@ -244,9 +235,66 @@ msgstr ""
 msgid "+500кг"
 msgstr ""
 
-#: keyboards/inline/order_keyboard.py:18
+#: keyboards/inline/admin/order.py:54 keyboards/inline/order_keyboard.py:18
 #, fuzzy
 msgid "Отменить заказ ❌"
+msgstr "Checkout ✅"
+
+#: keyboards/inline/admin/order.py:7 keyboards/inline/order_keyboard.py:26
+msgid "Завершен ✅"
+msgstr ""
+
+#: keyboards/inline/admin/order.py:7 keyboards/inline/order_keyboard.py:26
+msgid "Обрабатывается 🕗"
+msgstr ""
+
+#: keyboards/inline/admin/order.py:9 keyboards/inline/order_keyboard.py:28
+msgid "Отменен ❌"
+msgstr ""
+
+#: keyboards/inline/order_keyboard.py:34
+msgid ""
+"<b>Заказ №{order_id}</b>\n"
+"<b>Сумма:</b> {order_sum:,} сум.\n"
+"<b>Время оформления:</b> {order_time}\n"
+"\n"
+"<b>Статус:</b> {status}"
+msgstr ""
+
+#: keyboards/inline/admin/menu.py:15
+#, fuzzy
+msgid "Посмотреть записи 📖"
+msgstr "Show items"
+
+#: keyboards/inline/admin/menu.py:20
+msgid "Найти запись 🔎"
+msgstr ""
+
+#: keyboards/inline/admin/menu.py:24
+#, fuzzy
+msgid "Назад ↩️"
+msgstr "Back"
+
+#: keyboards/inline/admin/order.py:18
+msgid ""
+"<b>Заказ №{order_id}</b>\n"
+"<b>Сумма:</b> {order_sum:,} сум.\n"
+"\n"
+"<b>Номер телефона:</b> {phone_number}\n"
+"<b>Адрес доставки:</b> {address}\n"
+"\n"
+"<b>Время оформления:</b> {order_time}\n"
+"<b>Статус:</b> {status}"
+msgstr ""
+
+#: keyboards/inline/admin/order.py:41
+#, fuzzy
+msgid "Посмотреть адрес 📍"
+msgstr "Show items"
+
+#: keyboards/inline/admin/order.py:48
+#, fuzzy
+msgid "Завершить заказ ✅"
 msgstr "Checkout ✅"
 
 #: utils/helpers/decorators.py:13 utils/helpers/decorators.py:24
@@ -265,5 +313,16 @@ msgstr ""
 #~ msgstr "Orders 🗂"
 
 #~ msgid "Send location 📍"
+#~ msgstr ""
+
+#~ msgid "Просмотр товаров заказа №{}"
+#~ msgstr "You have't got any items on cart."
+
+#~ msgid ""
+#~ "Заказ №{order_id}\n"
+#~ "Сумма: {order_sum:,} сум.\n"
+#~ "Время оформления: {order_time}\n"
+#~ "\n"
+#~ "Статус: {status}"
 #~ msgstr ""
 

@@ -53,12 +53,12 @@ async def cart_callback_handler(call: CallbackQuery, callback_data: dict):
     text = ""
     reply_markup = None
     if action == 'clear':
-        text = _("Корзина очищена")
+        text = _("Корзина очищена.")
         await Cart.clear_cart()
         await call.message.edit_reply_markup()
         await call.message.edit_text(text=text)
     if action == 'show':
-        text = _("Просмотр товаров в корзине")
+        text = _("Просмотр товаров в корзине.")
         await call.message.edit_text(text=text)
         await get_items_with_keyboard(call)
     if action == 'order':
@@ -78,7 +78,7 @@ async def menu_cart_back_handler(message: Message):
 @dp.message_handler(Text(equals=get_all_language_variants("Оформить заказ ✅")))
 @user_sign_in_message
 async def menu_cart_order_handler(message: Message):
-    text = _("Пожалуйста, отправьте свою локацию")
+    text = _("Пожалуйста, отправьте свою локацию.")
     reply_markup = get_location_keyboard()
     await message.answer(text, reply_markup=reply_markup)
     await OrderState.Location.set()
@@ -89,9 +89,7 @@ async def menu_cart_order_handler(message: Message):
 async def menu_cart_location_handler(message: ContentType.LOCATION, state: FSMContext):
     async with state.proxy() as data:
         data["location"] = message.location
-    if message is not None:
-        logging.info("latitude: %s; longitude: %s" % (message.location.latitude, message.location.longitude))
-    text = _("Пожалуйста, отправьте свой контакт")
+    text = _("Пожалуйста, отправьте свой контакт.")
     reply_markup = get_contact_keyboard()
     await message.answer(text, reply_markup=reply_markup)
     await OrderState.Contact.set()

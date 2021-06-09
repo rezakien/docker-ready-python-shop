@@ -32,7 +32,7 @@ async def item_cart_resolve(call: CallbackQuery, callback_data: dict):
         if res["message"] == "ERROR_CAPACITY":
             text = _("Минимальный объем товара составляет 100 кг.")
         elif res["message"] == "UNKNOWN_ERROR":
-            text = _("Произошла неизвестная ошибка при удалении")
+            text = _("Произошла неизвестная ошибка при удалении.")
     await call.answer(text=text, cache_time=1)
 
 
