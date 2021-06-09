@@ -8,12 +8,3 @@ def get_menu_keyboard(locale=None):
         [KeyboardButton(_("Заказы 📦", locale=locale)), KeyboardButton(_("Помощь ❓", locale=locale))],
         [KeyboardButton(_("Изменить язык 🌐", locale=locale))]
     ])
-
-
-def get_admin_menu_keyboard(locale=None):
-    return ReplyKeyboardMarkup(resize_keyboard=True, keyboard=[
-        [KeyboardButton(_("Заказы 📦", locale=locale))],
-        # [KeyboardButton(_("Категории 🔜", locale=locale))],
-        # [KeyboardButton(_("Товары 🔜", locale=locale))],
-        # [KeyboardButton(_("Настройки 🔜", locale=locale))]
-    ])

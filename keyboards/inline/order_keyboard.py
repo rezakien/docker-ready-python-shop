@@ -20,3 +20,21 @@ def get_order_keyboard(order_id, canceled=False):
             )
         )
     return markup
+
+
+def get_order_text_and_keyboard(order):
+    status = _("Завершен ✅") if order.successful == True else _("Обрабатывается 🕗")
+    if order.canceled is True:
+        status = _("Отменен ❌")
+    order_text = _("Заказ №{order_id}\n"
+                   "Сумма: {order_sum:,} сум.\n"
+                   "Время оформления: {order_time}\n\n"
+                   "Статус: {status}".format(order_id=order.id,
+                                             order_sum=order.sum,
+                                             order_time=order.datetime.strftime("%m/%d/%Y, %H:%M:%S"),
+                                             status=status))
+    reply_markup = get_order_keyboard(order.id, order.canceled)
+    return {
+        "order_text": order_text,
+        "reply_markup": reply_markup
+    }

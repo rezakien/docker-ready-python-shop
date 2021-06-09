@@ -143,6 +143,7 @@ class Price(db.Model):
         if self.max_quantity is not None:
             add_text = f"до <b>{self.max_quantity:,}кг</b>"
         return f"<b>{self.price:,} сум</b> от <b>{self.min_quantity:,}кг</b> {add_text}".strip()
+
     id = Column(Integer, Sequence('price_id_seq'), primary_key=True)
     item_id = Column(Integer, ForeignKey('item.id'))
     min_quantity = Column(Integer)
@@ -173,7 +174,8 @@ class Item(db.Model):
             for item_price in item_prices:
                 prices += f"{item_price}\n"
         if item_cart is not None:
-            added_to_cart = "\nДобавлено в корзину в объеме {item_quantity:,} кг. ✅ ".format(item_quantity=item_cart.quantity)
+            added_to_cart = "\nДобавлено в корзину в объеме {item_quantity:,} кг. ✅ ".format(
+                item_quantity=item_cart.quantity)
         return "{item}{prices}{added_to_cart}".format(item=self, prices=prices, added_to_cart=added_to_cart)
 
     def __repr__(self):
@@ -355,6 +357,28 @@ class Order(db.Model):
         if order is not None:
             await order.update(canceled=True).apply()
         return order
+
+    @staticmethod
+    async def confirm_order(order_id):
+        current_user = types.User.get_current()
+        user = await User.get_user(current_user.id)
+
+        conditions = [
+            Order.id == order_id,
+            Order.canceled is not False
+        ]
+        order = await Order.query.where(and_(*conditions)).gino.first()
+        if order is not None:
+            await order.update(successful=True).apply()
+        return order
+
+    @staticmethod
+    async def new_orders():
+        return await Order.query.where([Order.successful == False]).gino.all()
+
+    @staticmethod
+    async def successful_orders():
+        return await Order.query.where([Order.successful == True]).gino.all()
 
 
 class OrderItem(db.Model):
