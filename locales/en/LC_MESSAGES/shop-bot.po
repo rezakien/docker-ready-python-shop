@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-06-10 01:48+0500\n"
+"POT-Creation-Date: 2021-06-10 14:53+0500\n"
 "PO-Revision-Date: 2021-05-25 14:27+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -16,11 +16,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.9.0\n"
 
 #: handlers/admin/menu.py:31
 msgid "Выберите, что хотите посмотреть/редактировать."
-msgstr ""
+msgstr "Choose what you want to view/edit."
 
 #: handlers/admin/menu.py:38
 msgid "Выберите действие."
@@ -30,62 +30,62 @@ msgstr "Choose action."
 msgid "Назад в меню заказов."
 msgstr "Back to orders."
 
-#: handlers/cart/menu.py:22
+#: handlers/cart/menu.py:23
 msgid "товара"
 msgstr "items"
 
-#: handlers/cart/menu.py:24
+#: handlers/cart/menu.py:25
 msgid "товар"
 msgstr "item"
 
-#: handlers/cart/menu.py:26
+#: handlers/cart/menu.py:27
 msgid "товаров"
 msgstr "items"
 
-#: handlers/cart/menu.py:37
+#: handlers/cart/menu.py:38
 #, fuzzy
 msgid "У вас пока нет товаров в корзине."
 msgstr "You have't got any items on cart."
 
-#: handlers/cart/menu.py:39
+#: handlers/cart/menu.py:40
 #, fuzzy
 msgid ""
 "В вашей корзине <b>{items_count} {items_word}</b>.\n"
 "<b>На сумму</b>: {sum:,} сум."
 msgstr ""
 "You have <b>{items_count} {items_word}</b>.\n"
-"<b>На сумму</b>: {sum:,} сум."
+"<b>for amount</b>: {sum:,} sum."
 
-#: handlers/cart/menu.py:56
+#: handlers/cart/menu.py:57
 #, fuzzy
 msgid "Корзина очищена."
-msgstr "Cart was cleared"
+msgstr "Cart was cleared."
 
-#: handlers/cart/menu.py:61
+#: handlers/cart/menu.py:62
 #, fuzzy
 msgid "Просмотр товаров в корзине."
 msgstr "You have't got any items on cart."
 
-#: handlers/cart/menu.py:65
+#: handlers/cart/menu.py:66
 msgid "Вы уверены, что хотите оформить заказ?"
 msgstr "Are you sure to order?"
 
-#: handlers/cart/menu.py:81
+#: handlers/cart/menu.py:82
 #, fuzzy
-msgid "Пожалуйста, отправьте свою локацию."
+msgid "Пожалуйста, отправьте свою локацию, либо введите адрес вручную."
 msgstr "Please, send your location"
 
-#: handlers/cart/menu.py:92
+#: handlers/cart/menu.py:93
 #, fuzzy
 msgid "Пожалуйста, отправьте свой контакт."
 msgstr "Please, send your contacts"
 
-#: handlers/cart/menu.py:105
+#: handlers/cart/menu.py:106
 #, fuzzy
 msgid "Заказ подтвержден! Ждите звонка, либо сообщения от нашего оператора."
 msgstr "Order success!Wait for a call of operator."
 
-#: handlers/cart/menu.py:107
+#: handlers/cart/menu.py:108
 msgid "Что-то пошло не так, повторите попытку."
 msgstr "Something went wrong. Retry, please."
 
@@ -162,7 +162,7 @@ msgstr "Checkout ✅"
 #: keyboards/default/contacts_keyboard.py:11
 #, fuzzy
 msgid "Назад ⬅️"
-msgstr "Back"
+msgstr "Back ⬅️"
 
 #: keyboards/default/contacts_keyboard.py:20
 msgid "Отправить контакт 📞"
@@ -201,7 +201,7 @@ msgstr "Clear 🛒"
 #: keyboards/inline/order_keyboard.py:11
 #, fuzzy
 msgid "Посмотреть товары 🔎"
-msgstr "Show items"
+msgstr "View products 🔎"
 
 #: keyboards/inline/cart_keyboard.py:13
 msgid "К оформлению заказа ✅"
@@ -225,15 +225,15 @@ msgstr "Back"
 
 #: keyboards/inline/menu_keyboard.py:72
 msgid "+25кг"
-msgstr ""
+msgstr "+25kg"
 
 #: keyboards/inline/menu_keyboard.py:75
 msgid "+100кг"
-msgstr ""
+msgstr "+100kg"
 
 #: keyboards/inline/menu_keyboard.py:78
 msgid "+500кг"
-msgstr ""
+msgstr "500kg"
 
 #: keyboards/inline/admin/order.py:54 keyboards/inline/order_keyboard.py:18
 #, fuzzy
@@ -242,15 +242,15 @@ msgstr "Checkout ✅"
 
 #: keyboards/inline/admin/order.py:7 keyboards/inline/order_keyboard.py:26
 msgid "Завершен ✅"
-msgstr ""
+msgstr "Ended ✅"
 
 #: keyboards/inline/admin/order.py:7 keyboards/inline/order_keyboard.py:26
 msgid "Обрабатывается 🕗"
-msgstr ""
+msgstr "Processing 🕗"
 
 #: keyboards/inline/admin/order.py:9 keyboards/inline/order_keyboard.py:28
 msgid "Отменен ❌"
-msgstr ""
+msgstr "Canceled ❌"
 
 #: keyboards/inline/order_keyboard.py:34
 msgid ""
@@ -260,15 +260,20 @@ msgid ""
 "\n"
 "<b>Статус:</b> {status}"
 msgstr ""
+"<b>Order №{order_id}</b>\n"
+"<b>Summary:</b> {order_sum :,} sum.\n"
+"<b>Checkout time:</b> {order_time}\n"
+"\n"
+"<b>Status:</b> {status}"
 
 #: keyboards/inline/admin/menu.py:15
 #, fuzzy
 msgid "Посмотреть записи 📖"
-msgstr "Show items"
+msgstr "View entries 📖"
 
 #: keyboards/inline/admin/menu.py:20
 msgid "Найти запись 🔎"
-msgstr ""
+msgstr "Find Record 🔎"
 
 #: keyboards/inline/admin/menu.py:24
 #, fuzzy
@@ -286,43 +291,39 @@ msgid ""
 "<b>Время оформления:</b> {order_time}\n"
 "<b>Статус:</b> {status}"
 msgstr ""
+"<b> Order №.{order_id} </b>\n"
+"<b> Summary: </b> {order_sum:,} sum.\n"
+"\n"
+"<b>Phone number:</b> {phone_number}\n"
+"<b>Delivery address:</b> {address}\n"
+"\n"
+"<b>Checkout time:</b> {order_time}\n"
+"<b>Status:</b> {status}"
 
 #: keyboards/inline/admin/order.py:41
 #, fuzzy
 msgid "Посмотреть адрес 📍"
-msgstr "Show items"
+msgstr "View address 📍"
 
 #: keyboards/inline/admin/order.py:48
 #, fuzzy
 msgid "Завершить заказ ✅"
 msgstr "Checkout ✅"
 
+#: utils/db/models.py:182
+msgid ""
+"\n"
+"Добавлено в корзину в объеме {item_quantity:,} кг. ✅ "
+msgstr ""
+"\n"
+"Added to the cart in the amount of {item_quantity:,} kg. ✅"
+
 #: utils/helpers/decorators.py:13 utils/helpers/decorators.py:24
 msgid "⛔️ Доступ в админ панель только у администраторов."
-msgstr ""
+msgstr "⛔️ Only administrators have access to the admin panel."
 
 #: utils/helpers/decorators.py:35 utils/helpers/decorators.py:46
 #: utils/helpers/decorators.py:57
 msgid "Выполнить действие невозможно. Введите /start, чтобы войти."
-msgstr ""
-
-#~ msgid "Товары 🗂"
-#~ msgstr "Items 🗂"
-
-#~ msgid "Заказы 🗂"
-#~ msgstr "Orders 🗂"
-
-#~ msgid "Send location 📍"
-#~ msgstr ""
-
-#~ msgid "Просмотр товаров заказа №{}"
-#~ msgstr "You have't got any items on cart."
-
-#~ msgid ""
-#~ "Заказ №{order_id}\n"
-#~ "Сумма: {order_sum:,} сум.\n"
-#~ "Время оформления: {order_time}\n"
-#~ "\n"
-#~ "Статус: {status}"
-#~ msgstr ""
+msgstr "The action cannot be performed. Enter /start to login."
 

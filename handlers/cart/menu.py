@@ -1,4 +1,5 @@
 import logging
+from typing import Union
 
 from aiogram import types
 from aiogram.dispatcher import FSMContext
@@ -14,7 +15,6 @@ from loader import dp, _, get_all_language_variants, geo_loc
 from states.order import OrderState
 from utils.db.models import Cart, Order, OrderItem, User, Item
 from utils.helpers.decorators import user_sign_in_message, user_sign_in_callback, user_sign_in_message_state
-from decimal import Decimal
 
 
 def get_word_items(count):
@@ -78,17 +78,17 @@ async def menu_cart_back_handler(message: Message):
 @dp.message_handler(Text(equals=get_all_language_variants("Оформить заказ ✅")))
 @user_sign_in_message
 async def menu_cart_order_handler(message: Message):
-    text = _("Пожалуйста, отправьте свою локацию.")
+    text = _("Пожалуйста, отправьте свою локацию, либо введите адрес вручную.")
     reply_markup = get_location_keyboard()
     await message.answer(text, reply_markup=reply_markup)
     await OrderState.Location.set()
 
 
-@dp.message_handler(content_types=ContentType.LOCATION, state=OrderState.Location)
+@dp.message_handler(content_types=[ContentType.LOCATION, ContentType.TEXT], state=OrderState.Location)
 @user_sign_in_message_state
-async def menu_cart_location_handler(message: ContentType.LOCATION, state: FSMContext):
+async def menu_cart_location_handler(message: Union[ContentType.LOCATION, ContentType.TEXT], state: FSMContext):
     async with state.proxy() as data:
-        data["location"] = message.location
+        data["location"] = message.location if message.location is not None else message.text
     text = _("Пожалуйста, отправьте свой контакт.")
     reply_markup = get_contact_keyboard()
     await message.answer(text, reply_markup=reply_markup)
@@ -119,14 +119,19 @@ async def save_order(state: FSMContext):
             if summary > 0:
                 current = types.User.get_current()
                 user = await User.get_user(current.id)
-                latitude = location.latitude
-                longitude = location.longitude
-                address = geo_loc.reverse("{}, {}".format(latitude, longitude), language='uz').address
+                latitude = None
+                longitude = None
+                if isinstance(location, str):
+                    address = location
+                else:
+                    latitude = location.latitude
+                    longitude = location.longitude
+                    address = geo_loc.reverse("{}, {}".format(latitude, longitude), language='ru').address
                 order = await Order(user_id=user.id,
                                     phone_number=contact["phone_number"],
-                                    latitude=latitude,
-                                    longitude=longitude,
-                                    address=address if address is not None and address != '' else None,
+                                    latitude=latitude if latitude is not None else None,
+                                    longitude=longitude if longitude is not None else None,
+                                    address=address if address is not None else None,
                                     sum=summary).create()
                 cart_items = await Cart.get_cart_items()
                 for cart_item in cart_items:
@@ -134,7 +139,7 @@ async def save_order(state: FSMContext):
                     price = await item.get_price(cart_item.quantity)
                     quantity = cart_item.quantity
                     summary = price * quantity
-                    order_item = await OrderItem(
+                    await OrderItem(
                         order_id=order.id,
                         item_id=item.id,
                         price=price,

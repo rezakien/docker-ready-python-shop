@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-06-10 01:48+0500\n"
+"POT-Creation-Date: 2021-06-10 14:53+0500\n"
 "PO-Revision-Date: 2021-05-25 14:27+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.9.0\n"
 
 #: handlers/admin/menu.py:31
 msgid "Выберите, что хотите посмотреть/редактировать."
@@ -31,53 +31,53 @@ msgstr ""
 msgid "Назад в меню заказов."
 msgstr ""
 
-#: handlers/cart/menu.py:22
+#: handlers/cart/menu.py:23
 msgid "товара"
 msgstr ""
 
-#: handlers/cart/menu.py:24
+#: handlers/cart/menu.py:25
 msgid "товар"
 msgstr ""
 
-#: handlers/cart/menu.py:26
+#: handlers/cart/menu.py:27
 msgid "товаров"
 msgstr ""
 
-#: handlers/cart/menu.py:37
+#: handlers/cart/menu.py:38
 msgid "У вас пока нет товаров в корзине."
 msgstr ""
 
-#: handlers/cart/menu.py:39
+#: handlers/cart/menu.py:40
 msgid ""
 "В вашей корзине <b>{items_count} {items_word}</b>.\n"
 "<b>На сумму</b>: {sum:,} сум."
 msgstr ""
 
-#: handlers/cart/menu.py:56
+#: handlers/cart/menu.py:57
 msgid "Корзина очищена."
 msgstr ""
 
-#: handlers/cart/menu.py:61
+#: handlers/cart/menu.py:62
 msgid "Просмотр товаров в корзине."
 msgstr ""
 
-#: handlers/cart/menu.py:65
+#: handlers/cart/menu.py:66
 msgid "Вы уверены, что хотите оформить заказ?"
 msgstr ""
 
-#: handlers/cart/menu.py:81
-msgid "Пожалуйста, отправьте свою локацию."
+#: handlers/cart/menu.py:82
+msgid "Пожалуйста, отправьте свою локацию, либо введите адрес вручную."
 msgstr ""
 
-#: handlers/cart/menu.py:92
+#: handlers/cart/menu.py:93
 msgid "Пожалуйста, отправьте свой контакт."
 msgstr ""
 
-#: handlers/cart/menu.py:105
+#: handlers/cart/menu.py:106
 msgid "Заказ подтвержден! Ждите звонка, либо сообщения от нашего оператора."
 msgstr ""
 
-#: handlers/cart/menu.py:107
+#: handlers/cart/menu.py:108
 msgid "Что-то пошло не так, повторите попытку."
 msgstr ""
 
@@ -271,6 +271,12 @@ msgstr ""
 msgid "Завершить заказ ✅"
 msgstr ""
 
+#: utils/db/models.py:182
+msgid ""
+"\n"
+"Добавлено в корзину в объеме {item_quantity:,} кг. ✅ "
+msgstr ""
+
 #: utils/helpers/decorators.py:13 utils/helpers/decorators.py:24
 msgid "⛔️ Доступ в админ панель только у администраторов."
 msgstr ""
@@ -332,5 +338,8 @@ msgstr ""
 #~ "Время оформления: {order_time}\n"
 #~ "\n"
 #~ "Статус: {status}"
+#~ msgstr ""
+
+#~ msgid "Пожалуйста, отправьте свою локацию."
 #~ msgstr ""
 
