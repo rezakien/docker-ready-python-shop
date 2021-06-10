@@ -6,7 +6,7 @@ from sqlalchemy import (Column, Integer, String, Sequence, BigInteger, DateTime,
 from sqlalchemy import sql
 from utils.db.database import db
 from aiogram import types
-from loader import Bot, _
+from loader import Bot
 from pathlib import Path
 
 
@@ -185,8 +185,8 @@ class Item(db.Model):
             for item_price in item_prices:
                 prices += f"{item_price}\n"
         if item_cart is not None:
-            added_to_cart = _("\nДобавлено в корзину в объеме {item_quantity:,} кг. ✅ ".format(
-                item_quantity=item_cart.quantity))
+            added_to_cart = "\nДобавлено в корзину в объеме {item_quantity:,} кг. ✅ ".format(
+                item_quantity=item_cart.quantity)
         return "{item}{prices}{added_to_cart}".format(item=self, prices=prices, added_to_cart=added_to_cart)
 
     def __repr__(self):
